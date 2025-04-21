@@ -1,4 +1,17 @@
 {
+<<<<<<< HEAD
+=======
+  "workspace:close": [],
+  "obsidian-git:commit": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Q"
+    }
+  ],
+  "markdown:toggle-preview": [],
+>>>>>>> origin/main
   "obsidian-git:fetch": [
     {
       "modifiers": [
@@ -7,6 +20,7 @@
       "key": "R"
     }
   ],
+<<<<<<< HEAD
   "obsidian-git:pull": [
     {
       "modifiers": [
@@ -15,6 +29,8 @@
       "key": "E"
     }
   ],
+=======
+>>>>>>> origin/main
   "obsidian-git:push2": [
     {
       "modifiers": [
@@ -23,14 +39,22 @@
       "key": "W"
     }
   ],
+<<<<<<< HEAD
   "markdown:toggle-preview": [],
   "workspace:close": [],
   "obsidian-git:commit": [
+=======
+  "obsidian-git:pull": [
+>>>>>>> origin/main
     {
       "modifiers": [
         "Mod"
       ],
+<<<<<<< HEAD
       "key": "Q"
+=======
+      "key": "E"
+>>>>>>> origin/main
     }
   ]
 }
