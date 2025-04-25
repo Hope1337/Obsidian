@@ -129,7 +129,7 @@ Vào **Advance** -> **Internet** -> **Security** -> **Port Forwarding
 
 7. **(Tùy chọn) Thiết lập khóa SSH để bảo mật**:
 
-	Xem thêm về ssh key tại : [[Setup ssh server]]
+	Xem thêm về ssh key tại : [[Git thông qua ssh]]
 	
    - Tạo cặp khóa SSH trên máy khách:
      ```bash
