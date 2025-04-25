@@ -8,35 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3415359331f36fe8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "6. Main Notes/Git Basic.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Git Basic"
-            }
-          },
-          {
             "id": "1571143dd6a4e759",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5. Templates/Purpose of this.md",
+                "file": "6. Main Notes/Git Introduction.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Purpose of this"
+              "title": "Git Introduction"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -184,8 +169,11 @@
   },
   "active": "1571143dd6a4e759",
   "lastOpenFiles": [
-    "4. Indexes/Purpose of this.md",
+    "6. Main Notes/Git local.md",
+    "6. Main Notes/Git Introduction.md",
+    "6. Main Notes/Git Configuration.md",
     "5. Templates/Purpose of this.md",
+    "4. Indexes/Purpose of this.md",
     "5. Templates",
     "2. Source Materials/Cheatsheet/Markdown.pdf",
     "3. Tags/SSH.md",
@@ -202,7 +190,6 @@
     "1. Rough Notes/Purpose of this.md",
     "2. Source Materials",
     "4. Indexes",
-    "6. Main Notes/Git Basic.md",
     "1. Rough Notes",
     "6. Main Notes/Git thông qua ssh.md",
     "6. Main Notes/Setup ssh server.md",

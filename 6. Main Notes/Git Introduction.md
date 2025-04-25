@@ -22,4 +22,21 @@ Quay trở lại câu hỏi ở trên, hồi năm nhất đại học, lúc tự
 
 Hồi cấp 3 mình cũng có nghe qua **Git** và **Git hub**, tuy nhiên tất cả những gì mình biết về nó là: Một nơi để lưu trữ code (thực ra cái này đúng với **Git hub**, còn **Git** mới có khả năng làm những điều trên) thế cho nên tới năm thứ 2 đại học mình mới bắt đầu nhận ra những thứ mà **Git** có thể làm và học cách sử dụng **Git** một cách tử tế.
 
+### Học Git như thế nào bây giờ?
 
+Trước hết, chúng ta sẽ dùng **Git** bằng terminal, **Git** có GUI nhưng mình thì không thích dùng, dân dev làm trên terminal mà, với cả đang code mà switch qua GUI rồi dùng chuột lười lắm, nếu bạn chưa tin thì có thể là bạn chưa code nhiều, mình ban đầu cũng vậy nhưng dần dần mình làm cái gì cũng sẽ trên terminal, rất là tiện.
+
+Để dùng được git thì tải nó về cái đã:
+```bash shell
+sudo apt update
+sudo apt install git
+git --version
+```
+Mình sẽ gom các lệnh trong **Git** thành từng nhóm, mục đích để dễ viết và tiện theo dõi hơn thay vì nhét mọi thứ vào cùng một chỗ. Bài viết này sẽ trình bày tổng quan công dụng của từng nhóm và link nó vào một bài viết khác kĩ hơn, giờ thì bắt đầu thôi!
+
+### I. Git Configuration
+
+Khi lần đầu sử dụng git, chúng ta cần setting một số thông tin
+```
+
+```
