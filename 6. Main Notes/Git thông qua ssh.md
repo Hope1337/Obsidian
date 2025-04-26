@@ -1,3 +1,4 @@
+[[Git]]
 #### I. Ngữ cảnh
 
 Thông thường khi muốn push hay clone một repo về, mình thường dùng terminal và gõ các lệnh hay gặp như git clone, git push ... và git sẽ yêu cầu xác thực người dùng. Lần đầu push, git sẽ yêu cầu mình nhập username và auth code (trước đây là password, tuy nhiên đã được loại bỏ và thay bằng auth code), git sẽ lưu thông tin này lại cho các lần sau. Tuy nhiên cũng có một cách làm khác là sử dụng **ssh key**: Thay vì dùng username và mật khẩu, bạn tạo một key (code mã hóa) trên máy bạn (cách tạo sẽ được đề cập sau), thêm key vừa tạo lên github setting, lúc này git đã có thể nhận diện được.

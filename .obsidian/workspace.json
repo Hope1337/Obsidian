@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "5d9bd50c07f0aa7d",
+        "id": "9e73d278c06d6e7e",
         "type": "tabs",
         "children": [
           {
-            "id": "1571143dd6a4e759",
+            "id": "8a3a4d0be4f5aec0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Main Notes/Git Introduction.md",
+                "file": "6. Main Notes/Các lệnh thường dùng trong Git.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Git Introduction"
+              "title": "Các lệnh thường dùng trong Git"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#Git",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -167,11 +167,30 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1571143dd6a4e759",
+  "active": "8a3a4d0be4f5aec0",
   "lastOpenFiles": [
-    "6. Main Notes/Git local.md",
+    "6. Main Notes/Setup ssh server.md",
+    "6. Main Notes/Untitled 1.md",
+    "6. Main Notes/Git thông qua ssh.md",
     "6. Main Notes/Git Introduction.md",
+    "6. Main Notes/CUDA C++.md",
+    "6. Main Notes/Git branch.md",
+    "6. Main Notes/Git local.md",
+    "6. Main Notes/Git remote.md",
+    "6. Main Notes/regex.md",
+    "3. Tags/Git.md",
     "6. Main Notes/Git Configuration.md",
+    "6. Main Notes/Các lệnh thường dùng trong Git.md",
+    "6. Main Notes/Markdown.md",
+    "2. Source Materials/Images/areas.png",
+    "areas 1.png",
+    "2. Source Materials/Images/lifecycle.png",
+    "2. Source Materials/Images/snapshots.png",
+    "2. Source Materials/Images/deltas.png",
+    "2. Source Materials/Purspose of this.md",
+    "2. Source Materials/Images",
+    "Untitled",
+    "Pasted image 20250426050704.png",
     "5. Templates/Purpose of this.md",
     "4. Indexes/Purpose of this.md",
     "5. Templates",
@@ -184,18 +203,10 @@
     "3. Tags/CUDA C++.md",
     "3. Tags/Latex.md",
     "3. Tags/Docker.md",
-    "3. Tags/Git.md",
-    "2. Source Materials/Purspose of this.md",
     "3. Tags",
     "1. Rough Notes/Purpose of this.md",
     "2. Source Materials",
     "4. Indexes",
-    "1. Rough Notes",
-    "6. Main Notes/Git thông qua ssh.md",
-    "6. Main Notes/Setup ssh server.md",
-    "6. Main Notes/CUDA C++.md",
-    "6. Main Notes/Markdown.md",
-    "7. References Materials",
     "7. Images/Pasted image 20250422044432.png",
     "7. Images/Pasted image 20250422044357.png",
     "Welcome.md",

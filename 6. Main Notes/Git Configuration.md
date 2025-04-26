@@ -1,11 +1,15 @@
+[[Git]]
+#Git 
 Khi lần đầu sử dụng **git**, ta cần setting một số thông tin (sẽ được đề cập sau), trong bài viết này mình sẽ chỉ đề cập đến một vài thứ mình hay sử dụng, tất nhiên là còn nhiều cái khác nữa nhưng thực sự thì mình cũng không dùng tới mấy setting đó nhiều nên không biết:v
+
+Btw, sẽ có nhiều setting nữa mà mình cũng hay dùng, tuy nhiên nó liên quan tới các chủ đề khác và khá khó để giải thích trực tiếp ở đây. Chính vì vậy mình sẽ chỉ nêu sơ lược nó là gì rồi link nó đến một bài viết khác.
 
 Chúng ta có thể thiết lập các setting ở ba mức độ theo thứ tự giảm dần phạm vi như sau:
 - **system**: áp dụng cho toàn bộ user trên máy hiện tại, file config nằm ở `usr/local/git/etc/gitconfig`
 - **global**: áp dụng cho toàn bộ repo của user hiện tại, file config nằm ở `$home/.gitconfig`
 - **local**: áp dụng cho repo hiện tại, file config nằm ở `.git/config`
 
-Đối với thiết lập, **system**. Nếu bạn đã quên (như mình) thì dù là trên window hoặc linux, mỗi máy tính đều có thể dùng được cho nhiều user, tức là tùy chọn này sẽ áp dụng cho bất kì ai đăng nhập vào trong máy hiện tại.
+Đối với thiết lập, **system**. Nếu bạn đã quên (như mình) thì dù là trên window hoặc linux, mỗi máy tính đều có thể dùng được cho nhiều user, tức là tùy chọn này sẽ áp dụng cho bất kì ai đăng nhập vào trong máy hiện tại. Chúng ta thường sẽ dùng `--global` lnhiều nhất.
 
 ==Một số lệnh liên quan tới file config của git==:
 - Liệt kê các config (kèm với phạm vi) 
@@ -34,7 +38,7 @@ git config --global core.editor "code --wait"
 ```
 > config này làm gì vậy?
 
-Thường khi git yêu cầu nhập thông tin, nó sẽ mở một trình soạn thảo để bạn nhập (mặc định là nano trên ubuntu thì phải). Ví dụ như khi `git commit` mà không có cờ `-m` thì git sẽ bật một editor lên và yêu cầu bạn nhập nội dung vào. `code` ở trên là vscode và `--wait` là để chờ bạn đóng cửa sổ edit thì mới tiếp tục. Bạn có thể setting các editor khác như:
+Thường khi git yêu cầu nhập thông tin, nó sẽ mở một trình soạn thảo để bạn nhập (mặc định là nano trên ubuntu thì phải). Ví dụ như khi `git commit` mà không có cờ `-m` thì git sẽ bật một editor lên và yêu cầu bạn nhập nội dung vào. `code` ở trên là vscode và `--wait` là để chờ bạn đóng cửa sổ edit thì mới tiếp tục. Đừng lo nếu bạn chưa hiểu `git commit` là gì, điều quan trọng bạn cần nắm ở đây là sẽ có những lúc git cần bạn nhập thông tin, và việc config `core.editor` giúp bạn lựa chọn bạn muốn làm việc trên editor nào.  Bạn có thể setting các editor khác như:
 
 ```bash
 git config --global core.editor "vim"
@@ -70,7 +74,14 @@ Ví dụ **Lucky** đang code trên window còn **Min** đang code trên linux, 
 git config --global core.autocrlf input
 ```
 
-#### 4. Tạo alias
+#### 4. Default branch name
+
+```bash
+git config --global init.defaultBranch main
+```
+Mặc định branch là master, tuy nhiên quy ước này đã thay đổi, tức là giờ đây tên của branch chính nên được đặt là `main`. 
+
+#### Tạo alias
 
 Nếu có một lệnh nào đó mà bạn dùng nhiều thì có thể tạo alias cho nó, ví dụ:
 ```bash
@@ -80,3 +91,9 @@ Bạn có thể alias lệnh này bằng cách:
 ```bash
 git config --global alias.last 'log -1 HEAD'
 ```
+
+#### Check config mặc định
+```bash
+git config --list
+```
+
