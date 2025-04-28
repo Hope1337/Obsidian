@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Main Notes/PATH aka biến môi trường.md",
+                "file": "6. Main Notes/GNU, GCC, GDB, GNOME, GPL là gì.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PATH aka biến môi trường"
+              "title": "GNU, GCC, GDB, GNOME, GPL là gì"
             }
           },
           {
@@ -183,11 +183,11 @@
   },
   "active": "4fc1e5f9477f4a9f",
   "lastOpenFiles": [
-    "6. Main Notes/VIM.md",
     "6. Main Notes/PATH aka biến môi trường.md",
+    "6. Main Notes/VIM.md",
     "6. Main Notes/Intelli VScode.md",
     "6. Main Notes/Markdown.md",
-    "6. Main Notes/GNU, GCC, GNOME, glang là gì.md",
+    "6. Main Notes/GNU, GCC, GDB, GNOME, GPL là gì.md",
     "6. Main Notes/Git thông qua ssh.md",
     "6. Main Notes/Git remote.md",
     "6. Main Notes/Git Introduction.md",
