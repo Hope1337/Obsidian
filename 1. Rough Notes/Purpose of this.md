@@ -1,1 +1,0 @@
-To jot down any idea that I had at that time but I haven't dig more into it.

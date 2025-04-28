@@ -2,7 +2,6 @@ Chán dùng chuột khi code?
 Hãy dùng VIM
 
 **Command Count Motion**
-
 ### Advance
 ```vim
 # find, at the charector
@@ -305,7 +304,8 @@ Giới hạn phạm vi thay thế:
 # từ dòng hiện tại tới cuối file
 :.,$s
 
-# trong vùng được chọn (bật visual mode là nó tự động thêm vào) :'<,>'s
+# trong vùng được chọn (bật visual mode là nó tự động thêm vào)
+:'<,>'s
 ```
 
 ### 5. Macro 
@@ -322,6 +322,12 @@ q
 ```
 
 
+### 6. Navigate on working dir
+
+```vim
+# back and forth
+Ctrl + Shift + E
+```
 
 
 
