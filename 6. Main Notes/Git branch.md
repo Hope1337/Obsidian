@@ -1,4 +1,4 @@
-[[Git]]
+#Git
 ```bash
 # create new branch, the HEAD cursor still in the current branch, not the new one
 git branch testing

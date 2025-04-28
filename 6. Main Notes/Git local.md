@@ -1,4 +1,4 @@
-[[Git]]
+#Git 
 Như mình đã trình bày trong [[Git Introduction]], git là một distributed vcs, tức là mỗi máy đều sẽ có một version riêng của lịch sử thay đổi code. Nó sẽ lưu trữ các thông tin về lịch sử thay đổi code trong máy của bạn, locally. Không cần internet thì bạn vẫn có thể thao tác trên cái history này được và khi nào cần thì mới push lên drive service (như **git hub**) thôi. Trong bài viết này mình sẽ chỉ đề cập đến việc làm việc với history một cách cục bộ thôi chứ chưa động gì đến remote repo (git hub), tuy nhiên phần này là kiến thức nền tảng bởi vì bạn cần làm việc với history local trước khi push nó lên remote.
 
 #### 1. Khởi tạo một repo

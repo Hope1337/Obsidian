@@ -1,6 +1,5 @@
-[[Git]]
 #Git 
-Khi lần đầu sử dụng **git**, ta cần setting một số thông tin (sẽ được đề cập sau), trong bài viết này mình sẽ chỉ đề cập đến một vài thứ mình hay sử dụng, tất nhiên là còn nhiều cái khác nữa nhưng thực sự thì mình cũng không dùng tới mấy setting đó nhiều nên không biết:v
+Khi lần đầu sử dụng **git**, ta cần setting một số thông tin (sẽ được đề cập sau), trong bài viết này mình sẽ chỉ đề cập đến một vài thứ mình hay sử dụng, tất nhiên là còn nhiều cái khác nữa nhưng thực sự thì mình cũng không dùng tới mấy setting đó nhiều nên không biết 😆
 
 Btw, sẽ có nhiều setting nữa mà mình cũng hay dùng, tuy nhiên nó liên quan tới các chủ đề khác và khá khó để giải thích trực tiếp ở đây. Chính vì vậy mình sẽ chỉ nêu sơ lược nó là gì rồi link nó đến một bài viết khác.
 

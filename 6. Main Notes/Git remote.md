@@ -1,4 +1,4 @@
-[[Git]]
+#Git 
 #### 1. Thiết lập kết nối local và remote
 
 ```bash

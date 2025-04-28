@@ -1,3 +1,4 @@
+#ssh 
 ##### I. Một chút kiến thức về mạng
 
 Mạng Internet có thể được xem như một lưới các máy kết nối với nhau, mỗi máy được phân biệt qua một IP duy nhất. Tuy nhiên, thường thì máy tính cá nhân của chúng ta sẽ không có cái IP duy nhất này mà chỉ có "IP cục bộ". 

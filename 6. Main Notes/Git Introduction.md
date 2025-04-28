@@ -1,4 +1,4 @@
-[[Git]]
+#Git 
 > Vấn đề của chúng ta là gì?
 
 Đây luôn là câu hỏi mở đầu khi chúng ta muốn học về một công cụ mới. Công cụ sinh ra để giải quyết một vấn đề nào đó trong cuộc sống, thế cho nên rất tự nhiên khi đặt một câu hỏi thế này để ta có một cái cái nhìn khái quát về ngữ cảnh, công dụng và ý nghĩa của công cụ ta đang tìm hiểu.
