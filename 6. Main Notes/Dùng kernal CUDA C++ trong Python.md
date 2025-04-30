@@ -40,6 +40,127 @@ python setup.py install
 Lúc này quá trình `build` sẽ diễn ra, nó sẽ tạo ra một số file cần thiết, sau đó bạn chỉ cần import (hướng dẫn ở bên dưới) hàm bạn vừa build là được rồi.
 ### 2. Let's get hands on
 
-Trong ví dụ này, mình sẽ code một 
+Trong ví dụ này, mình sẽ code một kernel đơn giản là `vector_add`: cộng hai vector
 
-Đầu tiên mình sẽ tạo một file vector.cu
+Đầu tiên, mình sẽ tạo một folder `lablib`, đây sẽ là nơi chứa code `.cpp` và `.cu` của mình. Tiếp đến mình sẽ tạo hai file là `vector_add_cuda.cu` và `vector_add.cpp`:
+
+File `vector_add_cuda.cu`:
+```cpp
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <torch/extension.h>
+  
+// CUDA kernel for vector addition
+__global__ void vector_add_kernel(float* a, float* b, float* out, int n) {
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx < n) {
+        out[idx] = a[idx] + b[idx];
+    }
+}
+
+
+// Wrapper function to launch the kernel
+void vector_add_cuda(torch::Tensor a, torch::Tensor b, torch::Tensor out) {
+    int n = a.size(0);
+    int threads = 256;
+    int blocks = (n + threads - 1) / threads;
+
+    vector_add_kernel<<<blocks, threads>>>(
+        a.data_ptr<float>(),
+        b.data_ptr<float>(),
+        out.data_ptr<float>(),
+        n
+    );
+
+    cudaError_t err = cudaGetLastError();
+    TORCH_CHECK(err == cudaSuccess, "CUDA error: ", cudaGetErrorString(err));
+}
+```
+
+File 'vector_add.cpp':
+
+```cpp
+#include <torch/extension.h>
+
+void vector_add_cuda(torch::Tensor a, torch::Tensor b, torch::Tensor out);
+
+torch::Tensor vector_add(torch::Tensor a, torch::Tensor b) {
+    TORCH_CHECK(a.device().is_cuda(), "a must be a CUDA tensor");
+    TORCH_CHECK(b.device().is_cuda(), "b must be a CUDA tensor");
+    TORCH_CHECK(a.sizes() == b.sizes(), "Tensor sizes must match");
+    TORCH_CHECK(a.dtype() == torch::kFloat32, "Tensors must be float32");
+
+    auto out = torch::empty_like(a);
+    vector_add_cuda(a, b, out);
+    return out;
+}
+
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+    m.def("vector_add", &vector_add, "Add two vectors on CUDA");
+}
+```
+
+Đoạn code:
+```cpp
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+    m.def("vector_add", &vector_add, "Add two vectors on CUDA");
+}
+```
+Trong đó:
+- `TORCH_EXTENSION_NAME`: là một biến sẽ được thay thế lúc chạy, biến này là tên của module bạn đang build (tí nữa bạn sẽ hiểu).
+- string `vector_add` là tên của hàm mà bạn muốn đặt. Tức là hàm hiện tại đang được nối là `vector_add` (có dấu tham chiếu ở đối số thứ hai), tuy nhiên bạn hoàn toàn có thể đặt cho nó một tên khác bằng cách thay đổi string ở đối số thứ nhất, bạn đặt tên thế nào thì một tí nữa gọi ra dùng phải xài tên đó.
+
+Tiếp theo ta cần code file `setup.py` :
+```python
+from setuptools import setup
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+
+setup(
+    name='vector_add',
+    ext_modules=[
+        CUDAExtension('hihi', [
+            'lablib/vector_add.cpp',
+            'lablib/vector_add_cuda.cu',
+        ]),  
+    ],
+    cmdclass={
+        'build_ext': BuildExtension
+    }
+)
+```
+
+Xong rồi, giờ bạn chỉ cần chạy `python setup.py install` để build. Và sau khi build xong, bạn chỉ cần `import hihi` và gọi `hihi.vector_add` là được.
+
+```python
+import torch
+import hihi 
+
+# Tạo 2 tensor trên GPU
+a = torch.randn(5, device='cuda')
+b = torch.randn(5, device='cuda')
+
+# Gọi hàm vector_add của bạn
+out = hihi.vector_add(a, b)
+
+print(out)
+print(torch.allclose(out, a + b))  # Kiểm tra xem kết quả có đúng không
+```
+
+Đó, vậy là chúng ta vừa build được một kernel `CUDA` và bind nó vào python để dùng rồi!
+
+
+==Note==: Mình đặt tên extension là `hihi` là có mục đích, bạn có thấy tham số `name='vector_add'` ở trên không? Thực ra nếu bạn hỏi GPT hay Grok, tham số `name` này và cái tên trong `CUDAExtension` nó sẽ để giống nhau (tức cả hai đều là `vector_add`). Điều này ban đầu gây cho mình thắc mắc là.
+
+> Vậy `name` để làm gì?
+
+Chà, nó là tên package của bạn, tức là khi phân phối hoặc muốn xóa package bạn vừa build, bạn phải gõ lệnh:
+```bash
+# You shoud use this
+pip uninstall vector_add
+
+# NOT THIS 
+pip uninstall hihi
+```
+Nếu không tin thì bạn cứ `pip show  hihi`, nó sẽ chẳng tìm thấy package nào cho bạn đâu, phải là `pip show vector_add` mới phải.
+
+À bạn còn nhớ `TORCH_EXTENSION_NAME` không? Trong quá trình build, nó sẽ được thay bằng `hihi` và sẽ được nối với `vector_add` của chúng ta. Nhờ vậy mà bạn mới gọi được `hihi.vector_add` đó.

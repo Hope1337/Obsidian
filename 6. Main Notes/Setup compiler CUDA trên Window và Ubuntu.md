@@ -27,17 +27,19 @@ Trên `Ubuntu` thì mọi chuyện bớt lằng nhằng hơn, bạn khỏi cần
 
 À nhớ đảm bảo phiên bản `CUDA` của `nvcc` khớp với `CUDA` của pytorch là được.
 
-==Note==: `IntelliSense` đòi cả hai path bên dưới đây mới hoạt động:
+==Note==: `IntelliSense` đòi cả ba path bên dưới đây mới hoạt động:
 ```bash
 ...miniconda3/envs/lab/Lib/site-packages/torch/include, 
-...miniconda3/envs/lab/Lib/site-packages/torch/include/torch/csrc/api/include
+...miniconda3/envs/lab/Lib/site-packages/torch/include/torch/csrc/api/include,
+...miniconda3/envs/lab/include
 ```
+Path thứ ba là cho python nó hoạt động, `Pylance` thì tiện hơn do nó hoạt động ăn khớp với `conda` luôn, tức là nó sẽ tự kiếm python phù hợp với môi trường conda hiện tại.
 
-Nếu chỉ thêm path đầu tiên thì các thư viện như `#include <torch/extension.h>` vẫn hoạt động ở `.cpp`, tuy nhiên qua `.cu` thì nhót. Mình cũng không biết tại sao nhưng Grok giải thích phần này cũng khá lằng nhằng.
+Nếu chỉ thêm path đầu tiên (và path thứ ba) thì các thư viện như `#include <torch/extension.h>` vẫn hoạt động ở `.cpp`, tuy nhiên qua `.cu` thì nhót. Mình cũng không biết tại sao nhưng Grok giải thích phần này cũng khá lằng nhằng.
 
-> Từ từ, `IntelliSense` là gì vậy đại ca Mạnh ơi?
+> Từ từ, `IntelliSense` hay `Pylance` là gì vậy đại ca Mạnh ơi?
 
-Nhớ lúc code có mấy cái nhắc khéo tên hàm, tham số hàm... không? Nó là `IntelliSense` đó
+Nhớ lúc code có mấy cái nhắc khéo tên hàm, tham số hàm... không? Nó là `IntelliSense/Pylance` (tương ứng cho `C++` và `python`) đó.
 
 > Lười cài quá, bỏ được không?
 

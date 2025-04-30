@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
+                "file": "6. Main Notes/Dùng kernal CUDA C++ trong Python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Setup compiler CUDA trên Window và Ubuntu"
+              "title": "Dùng kernal CUDA C++ trong Python"
             }
           },
           {
@@ -194,12 +194,12 @@
   },
   "active": "9a45de021754dec0",
   "lastOpenFiles": [
+    "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
     "6. Main Notes/Dùng kernal CUDA C++ trong Python.md",
     "6. Main Notes/Quyền sudo Linux.md",
     "3. Tags/Linux user management.md",
     "6. Main Notes/Chính sách tài khoản cho user trên Linux.md",
     "6. Main Notes/Different CUDA from nvcc and nvida-smi.md",
-    "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
     "6. Main Notes/Chapter 2 Heterogeneous data parallel computing.md",
     "6. Main Notes/Chapter 3 Multidimensional grids and  data.md",
     "6. Main Notes/Linux File Permission.md",
