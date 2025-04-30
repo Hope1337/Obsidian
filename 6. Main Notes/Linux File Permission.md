@@ -47,6 +47,10 @@ Trong đó:
 - **example.txt**: Tên tệp/thư mục.
     
 
+==Note==:
+- `r`: được xem danh sách file
+- `w`: được tạo, xóa, đổi tên file trong thư mục
+- `x`: được phép truy cập vào bên trong.
 ## 2. Quản lý File Permission với chmod
 
 Lệnh chmod (change mode) được sử dụng để thay đổi quyền truy cập của tệp/thư mục. Có hai cách sử dụng chmod: **Symbolic mode** và **Numeric mode**.
