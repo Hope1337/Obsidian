@@ -4,6 +4,8 @@ Trong documentation của pytorch có hai bài viết, một là [Custom C++ and
 
 Tuy nhiên, bài viết đầu tiên có vẻ đơn giản hơn nhiều và phù hợp với mục đích viết một kernel CUDA rồi gọi nó dùng trong python kết hợp với pytorch, vậy cho nên mình sẽ tập trung vào nó trước.
 
+==Important==: Check qua bài viết [[Setup compiler CUDA trên Window và Ubuntu]] trước khi đọc tiếp, nó sẽ giúp bạn chuẩn bị những thứ cần thiết 
+
 ### 1. Tổng quan
 
 ==Để dùng được một hàm CUDA (hoặc C++) trong python ta cần viết một số file sau==:
@@ -35,9 +37,9 @@ Thực ra là có, `setuptools` sẽ build code `.cu` và `.cpp` của các bạ
 python setup.py install
 ```
 
+Lúc này quá trình `build` sẽ diễn ra, nó sẽ tạo ra một số file cần thiết, sau đó bạn chỉ cần import (hướng dẫn ở bên dưới) hàm bạn vừa build là được rồi.
 ### 2. Let's get hands on
 
-Trong ví dụ này, mình sẽ 
+Trong ví dụ này, mình sẽ code một 
 
 Đầu tiên mình sẽ tạo một file vector.cu
-
