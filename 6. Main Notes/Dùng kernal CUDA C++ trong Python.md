@@ -164,3 +164,6 @@ pip uninstall hihi
 Nếu không tin thì bạn cứ `pip show  hihi`, nó sẽ chẳng tìm thấy package nào cho bạn đâu, phải là `pip show vector_add` mới phải.
 
 À bạn còn nhớ `TORCH_EXTENSION_NAME` không? Trong quá trình build, nó sẽ được thay bằng `hihi` và sẽ được nối với `vector_add` của chúng ta. Nhờ vậy mà bạn mới gọi được `hihi.vector_add` đó.
+
+
+==Important==: Hãy đọc [[Build extension]] để hiểu các file được generate ra và thao tác đúng cách.
