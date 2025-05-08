@@ -4,63 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "19285f711eb6ebe4",
+        "id": "0689c50dfa85c7bd",
         "type": "tabs",
         "children": [
           {
-            "id": "858fa07b7070d1db",
+            "id": "986429cec39d3d0a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3. Tags/Linux user management.md",
+                "file": "6. Main Notes/Daily Learning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linux user management"
-            }
-          },
-          {
-            "id": "9a45de021754dec0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "6. Main Notes/Dùng kernal CUDA C++ trong Python.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Dùng kernal CUDA C++ trong Python"
-            }
-          },
-          {
-            "id": "14a4263f6a71f66a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "6. Main Notes/Build extension.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Build extension"
-            }
-          },
-          {
-            "id": "c15ba57bac617935",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "title": "Daily Learning"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -206,34 +167,36 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "14a4263f6a71f66a",
+  "active": "986429cec39d3d0a",
   "lastOpenFiles": [
-    "6. Main Notes/Dùng kernal CUDA C++ trong Python.md",
-    "6. Main Notes/Build extension.md",
-    "3. Tags/CUDA C++.md",
-    "6. Main Notes/Different CUDA from nvcc and nvida-smi.md",
-    "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
-    "6. Main Notes/Quyền sudo Linux.md",
-    "3. Tags/Linux user management.md",
-    "6. Main Notes/Chính sách tài khoản cho user trên Linux.md",
-    "6. Main Notes/Chapter 2 Heterogeneous data parallel computing.md",
-    "6. Main Notes/Chapter 3 Multidimensional grids and  data.md",
-    "6. Main Notes/Linux File Permission.md",
-    "6. Main Notes/Markdown.md",
-    "6. Main Notes/Quản lý hoạt động của user trên Linux.md",
+    "3. Tags/Idiom.md",
+    "6. Main Notes/Daily Learning.md",
+    "6. Main Notes/Writing Task 1.md",
+    "6. Main Notes/Writing Task 2.md",
+    "3. Tags/Writing.md",
+    "3. Tags/Speaking.md",
+    "3. Tags/Reading.md",
+    "3. Tags/Isaaclab.md",
+    "3. Tags/Latex.md",
     "3. Tags/Linux.md",
-    "6. Main Notes/Quản lý nhóm trên Linux.md",
-    "6. Main Notes/Tạo và xóa user trên Linux.md",
     "6. Main Notes/Untitled.md",
-    "6. Main Notes/Các lệnh thường dùng trong Git.md",
-    "6. Main Notes/Linux Directories.md",
-    "6. Main Notes/How Does Linux Boot Process Work.md",
-    "6. Main Notes/GNU, GCC, GDB, GNOME, GPL là gì.md",
-    "6. Main Notes/Git thông qua ssh.md",
-    "6. Main Notes/Git local.md",
-    "6. Main Notes/Git remote.md",
-    "6. Main Notes/Git Introduction.md",
-    "6. Main Notes/Git Configuration.md",
+    "3. Tags/IELTS.md",
+    "3. Tags/Listening.md",
+    "6. Main Notes/IELTS Listening logs.md",
+    "5/5/2025.md",
+    "5/5",
+    "5",
+    "3. Tags/Vocabulary.md",
+    "3. Tags/CUDA C++.md",
+    "3. Tags/VSCode.md",
+    "[Writing.md",
+    "6. Main Notes/Useful vocab in IELTS Speaking.md",
+    "3. Tags/Isaacsim.md",
+    "3. Tags/LibTorch.md",
+    "3. Tags/Linux user management.md",
+    "3. Tags/URDF.md",
+    "3. Tags/SSH.md",
+    "3. Tags/Markdown.md",
     "2. Source Materials/Visuals/out-3.mp4",
     "2. Source Materials/Visuals/6499636408822.mp4",
     "2. Source Materials/Visuals/1aa0171e-25b8-41a6-a5b2-f8f926aa8a9d.jpg",
@@ -251,8 +214,6 @@
     "2. Source Materials/Visuals/deltas.png",
     "2. Source Materials/Visuals",
     "Untitled",
-    "5. Templates",
-    "2. Source Materials/Cheatsheet/Markdown.pdf",
-    "2. Source Materials/Cheatsheet"
+    "5. Templates"
   ]
 }

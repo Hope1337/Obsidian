@@ -3,3 +3,4 @@
 [[Different CUDA from nvcc and nvida-smi]]
 [[Dùng kernal CUDA C++ trong Python]]
 [[Setup compiler CUDA trên Window và Ubuntu]]
+[[LibTorch]]
