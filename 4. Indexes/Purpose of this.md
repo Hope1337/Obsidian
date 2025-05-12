@@ -1,0 +1,1 @@
+Create index nodes to navigate through knowledge graph.

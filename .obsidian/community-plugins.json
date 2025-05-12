@@ -1,4 +1,8 @@
 [
   "terminal",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-vimrc-support",
+  "emoji-shortcodes",
+  "obsidian-emoji-toolbar",
+  "obsidian-icon-shortcodes"
 ]

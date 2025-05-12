@@ -1,0 +1,6 @@
+- ***Money doesn't grow on trees*** : *tiền không mọc từ trên cây ra đâu!*
+- ***an early bird**: người dậy sớm*
+- **I have a lot on my plate**: rất bận
+- **See eye to eye on sth**: không đồng quan điểm về thứ gì đó
+- **catch one's eye**: bắt mắt
+- **It's on the tip of my tongue**: nghĩ rằng sắp nói ra được rồi

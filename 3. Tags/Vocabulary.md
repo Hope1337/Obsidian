@@ -1,0 +1,24 @@
+- ***day off**: ngày nghỉ*
+- ***devotion**: sự tận tâm*
+- ***clinic**: phòng khám*
+- **Sabbatical officer**: ???
+- ***vice**: phó*
+- ***referee**: người giới thiệu*
+- ***out of the way**: đã xong*
+- ***outlets**: cửa hàng*
+- ***recession**: suy thoái kinh tế*
+- ***drama**: kịch*
+- ***secretary**: thư ký*
+- ***costumes**: trang phục*
+- ***persuad**: thuyết phục*
+- ***indigenous**: bản địa*
+- ***sustain**: duy trì*
+- ***potter**: thợ làm gốm*
+- ***conductor**: nhạc trưởng*
+- ***stand still**: bế tắc*
+- ***trekk**: đi bộ đường dài (qua núi, rừng)*
+- ***secluded**: bị tách biệt*
+- ***to file**: nộp cái hồ sơ*
+- ***intimidate**: đáng sợ
+- ***lounge**: phòng chờ*
+- 

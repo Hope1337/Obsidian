@@ -1,19 +1,10 @@
 {
-  "workspace:close": [],
   "obsidian-git:commit": [
     {
       "modifiers": [
         "Mod"
       ],
       "key": "Q"
-    }
-  ],
-  "obsidian-git:push2": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "W"
     }
   ]
 }
