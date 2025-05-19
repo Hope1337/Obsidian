@@ -57,12 +57,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1. Rough Notes/Untitled 1.md",
+                "file": "1. Rough Notes/Một số nhánh của vật lý và toán học.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Untitled 1"
+              "title": "Một số nhánh của vật lý và toán học"
             }
           }
         ],
@@ -214,8 +214,12 @@
   },
   "active": "7965f0e8b78145cc",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
+    "6. Main Notes/Tạo và xóa user trên Linux.md",
+    "1. Rough Notes/Một số nhánh của vật lý và toán học.md",
+    "1. Rough Notes/IELTS leanring resources.md",
     "1. Rough Notes/Untitled 1.md",
+    "1. Rough Notes/Tư liệu quý.md",
+    "conflict-files-obsidian-git.md",
     "2. Source Material/Writing Task 1 Note.md",
     "6. Main Notes/Untitled 2.md",
     "6. Main Notes/Writing Task 1.md",
@@ -230,16 +234,12 @@
     "6. Main Notes/VIM.md",
     "6. Main Notes/Useful vocab in IELTS Speaking.md",
     "6. Main Notes/Untitled.md",
-    "6. Main Notes/Tạo và xóa user trên Linux.md",
     "6. Main Notes/TORCH_CHECK.md",
     "6. Main Notes/Setup ssh server.md",
     "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
     "6. Main Notes/Quản lý nhóm trên Linux.md",
     "6. Main Notes/Quản lý hoạt động của user trên Linux.md",
     "6. Main Notes/Quyền sudo Linux.md",
-    "6. Main Notes/Pytorch trong C++.md",
-    "6. Main Notes/Project Robot.md",
-    "6. Main Notes/PATH aka biến môi trường.md",
     "2. Source Materials/Visuals/video_20250411_061428.mp4",
     "2. Source Materials/Visuals/snapshots.png",
     "2. Source Materials/Visuals/ruMI3.png",
