@@ -7,14 +7,6 @@
       "key": "Q"
     }
   ],
-  "obsidian-git:fetch": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "R"
-    }
-  ],
   "obsidian-git:push2": [
     {
       "modifiers": [
@@ -23,14 +15,5 @@
       "key": "W"
     }
   ],
-  "obsidian-git:pull": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "E"
-    }
-  ],
-  "workspace:close": [],
-  "markdown:toggle-preview": []
+  "workspace:close": []
 }
