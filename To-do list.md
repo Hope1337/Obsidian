@@ -1,0 +1,6 @@
+- Làm bài tập đầy đủ
+- test n8n jarvis
+- **Zotero** quản lý tài liệu
+- Các công cụ trong nghiên cứu học thuật nói chung và machine learning nói riêng
+- Nâng cấp github page và Linkedin
+- Học tiếp về làm con robot

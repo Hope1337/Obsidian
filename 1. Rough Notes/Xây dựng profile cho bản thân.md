@@ -1,0 +1,2 @@
+- Cải thiện github pages
+- Lập linkedin
