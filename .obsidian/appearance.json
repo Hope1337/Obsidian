@@ -2,5 +2,7 @@
   "textFontFamily": "",
   "enabledCssSnippets": [],
   "baseFontSize": 16,
-  "monospaceFontFamily": "Be Vietnam Pro"
+  "monospaceFontFamily": "Be Vietnam Pro",
+  "theme": "moonstone",
+  "cssTheme": "Sanctum"
 }

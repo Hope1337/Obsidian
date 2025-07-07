@@ -1,0 +1,8 @@
+- `asmath`
+- `parskip`
+- `graphicx`: thêm ảnh
+- `tabularx`
+- `multirow`
+- `rotating`: xoay bảng
+- `caption`
+- `subcaption`

@@ -1,5 +1,0 @@
-[[Speaking]]
-[[Writing]]
-[[Reading]]
-[[Listening]]
-[[Idiom]]

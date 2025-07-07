@@ -339,7 +339,7 @@ Ctrl + Shift + E
 
 
 
-![[vim-commands-cheat-sheet-by-pnap.pdf]]
+![[Vim.pdf]]
 
 
 
