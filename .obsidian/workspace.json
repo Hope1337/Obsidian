@@ -34,6 +34,18 @@
               "icon": "lucide-file",
               "title": "Revise Reinforcement Learning by Barto and Sutton"
             }
+          },
+          {
+            "id": "a14aa100fb8b32a1",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/Drawing 2025-07-08 13.37.13.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2025-07-08 13.37.13.excalidraw"
+            }
           }
         ],
         "currentTab": 1
@@ -93,7 +105,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 332.5
+    "width": 332.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3a6c179aa3a2c6d",
@@ -199,8 +212,10 @@
   },
   "active": "e692c7814a44a56d",
   "lastOpenFiles": [
-    "Tabular Solution Methods.md",
+    "Pasted image 20250709004239.png",
+    "Excalidraw/Drawing 2025-07-08 13.37.13.excalidraw.md",
     "Revise Reinforcement Learning by Barto and Sutton.md",
+    "Tabular Solution Methods.md",
     "1. Rough Notes/Project RF.md",
     "2. Achieve/Excalidraw.md",
     "2. Achieve/AI Assistant project.md",
@@ -227,8 +242,6 @@
     "3. Tags/Writing.md",
     "3. Tags/Speaking.md",
     "3. Tags/Idiom.md",
-    "3. Tags/IELTS.md",
-    "3. Tags/Vocabulary.md",
     "3. Source Materials/Visuals/InsertingImagesEx8Overleaf.png",
     "3. Source Materials/Visuals/LaTeX_list_parameters-plain.svg",
     "3. Source Materials/Cheatsheet/Vim.pdf",

@@ -8,7 +8,7 @@ Nhắc lại, mục tiêu của một Agent RL là tìm policy tối ưu $\pi^*$
 $$
 \pi^* = \arg\max_{\pi}v_{\pi}(s), \space \forall s \in \mathcal{S}  
 $$
-- Nếu bạn thắc mắc thì *có tồn tại một $\pi^*$ sao cho $v_{\pi*}(s)\geq v(s)_{\pi}, \space \forall s$*   
+- Nếu bạn thắc mắc thì có tồn tại một $\pi^*$ sao cho $v_{\pi*}(s)\geq v(s)_{\pi}, \space \forall s$   
 - Hàm $v$ được gọi là *value function* ($V$ hoa được dùng cho trường hợp bảng) và hàm $q$ được gọi là *action value function* ($Q$ hoa được dùng cho trường hợp bảng). 
 
 #### Công thức Incremental 
@@ -38,10 +38,21 @@ Q_{n+1} &= Q_n + \alpha \left[ R_n - Q_n \right] \\
         &\quad + (1 - \alpha)^{n-1} \alpha R_1 + (1 - \alpha)^n Q_1 \\
         &= (1 - \alpha)^n Q_1 + \sum_{i=1}^{n} \alpha (1 - \alpha)^{n - i} R_i.
 \end{align*}
-
 $$
-==Chứng minh==
+==Chứng minh==: Định lí tổng cấp số nhân hữu hạn:
+Cho $r \in \mathbb{R}, \ |r| < 1$ thì:
+$$
+\sum_{k=0}^{n-1} r^k = \frac{1 - r^n}{1 - r}
+$$
 
+Do đó:
+$$
+\begin{align}
+	(1-\alpha)^n + \sum_{i=1}^n\alpha(1-\alpha)^{n-i} &= (1-\alpha)^n + \alpha\frac{1 - (1-\alpha)^n}{1 - (1-\alpha)}\\
+	&=(1-\alpha)^n + 1 - (1-\alpha)^n\\
+	&=1
+\end{align}
+$$
 
 ==Lưu ý==: Step size $\alpha$ mặc dù giống như learning rate $\eta$, có thể chọn theo kinh nghiệm, tuy nhiên về mặt lý thuyết để đảm bảo dãy hội tụ thì cần có hai điều kiện: 
 $$
@@ -52,5 +63,459 @@ $$
 $$  
 $(1)$ đảm bảo step size đủ lớn để vượt qua bất kì điều kiện ban đầu nào, $(2)$ đảm bảo rằng step size đủ nhỏ để hội tụ, $\frac{1}{n}$ đáp ứng cả hai điều kiện trên. Tuy nhiên trong thực tế ít ai làm vậy lắm, người tune $\alpha$ như tune learning rate vậy.
 
-#### Finite Markov Decision Process
+---
+## Finite Markov Decision Process
+
+$$
+p(s', r \mid s, a) \doteq \Pr\{ S_t = s', R_t = r \mid S_{t-1} = s, A_{t-1} = a \},
+$$
+Đây gọi là *dynamics* của MDP
+
+Return theo episode được định nghĩa là:
+$$
+G_t \doteq R_{t+1} + R_{t+2} + R_{t+3} \dots + R_T
+$$
+Nếu thêm discounting $\gamma$ thì return lúc này là:
+$$
+G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty}\gamma^k R_{t+k+1}
+$$
+Không khó để thấy:
+$$
+G_t = R_{t+1} + \gamma G_{t+1}
+$$
+
+==Value function==: Ta định nghĩa value function của một trạng thái $s$ dưới một policy $\pi$, kí hiệu là $v_{\pi}$:
+$$
+\begin{align}
+v_{\pi}(s) \doteq \mathbb{E}_{\pi}[G_t \mid S_t=s] = \mathbb{E}_{\pi} \left[ \sum_{k=0}^{\infty} \gamma^kR_{t+k+1} \mid S_t = s\right], \space \text{for all}\ s  \in  \mathcal{S}
+\end{align}
+$$ ==Action value function==: 
+$$
+q_{\pi}(s,a) \doteq \mathbb{E}[G_t | S_t = s, A_t = a] = \mathbb{E}_{\pi}\left[ \sum_{k=0}^{\infty} \gamma^kR_{t+k+1} \mid S_t = s, A_t = a \right]
+$$
+
+#### Iterative form
+
+Biến đổi công thức một chút, ta được dạng update phụ thuộc lẫn nhau, tức là $v_{\pi}(s)$ có thể được tính dựa trên $v_{\pi}(s')$ như sau:
+$$
+\begin{align*}
+v_\pi(s) &\doteq \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] \\
+         &= \mathbb{E}_\pi \left[ R_{t+1} + \gamma G_{t+1} \mid S_t = s \right] \\
+         &= \sum_a \pi(a \mid s) \sum_{s'} \sum_r p(s', r \mid s, a) \left[ r + \gamma \mathbb{E}_\pi \left[ G_{t+1} \mid S_{t+1} = s' \right] \right] \\
+         &= \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right], \quad \text{for all } s \in \mathcal{S}.
+\end{align*}
+$$
+Nhớ lại, dynamics của MDP như sau:
+$$
+p(s', r \mid s, a)
+$$
+Do đó, để tính kì vọng của $R_{t+1}$, ta phải xét đến $a$ được chọn là gì ($\pi(a \mid s$)), toàn bộ $r$ có khả năng xảy ra ($\sum_r$) cũng như xác suất biên của $r$ đó ($\sum_s'$). Đó là lí do cho cục công thức dài ngoằng ở trên =))))
+
+> Điều này thì có ý nghĩa gì?
+> 
+Có chứ! Công thức này để ta tính $v_{\pi}(s)$ theo kiểu update dần dần dựa trên các $v_{\pi}(s')$.
+
+#### Optimal policy
+
+Một policy $\pi$ được gọi là tốt hơn $\pi'$ khi và chỉ khi $v_{\pi}(s) \geq v_{\pi'}(s), \ \forall s$, ==và sẽ luôn tồn tại một ít nhất policy luôn tốt hơn mọi policy khác==. Mặc dù có thể có cùng lúc nhiều optimal policy, ta kí hiệu nó chung là $\pi_*$. Chúng có cùng optimal value function và action value function:
+$$
+\begin{align}
+v_*(s) &\doteq \max_{\pi}v_{\pi}(s), \\
+q_*(s,a) &\doteq \max_{\pi}q_{\pi}(s,a)
+\end{align}
+$$
+Ta có:
+$$
+\begin{align*}
+v_*(s) &= \max_{a \in \mathcal{A}(s)} q_*(s, a) \\
+       &= \max_a \mathbb{E}_{\pi_*} \left[ G_t \mid S_t = s, A_t = a \right] \\
+       &= \max_a \mathbb{E}_{\pi_*} \left[ R_{t+1} + \gamma G_{t+1} \mid S_t = s, A_t = a \right] \\
+       &= \max_a \mathbb{E} \left[ R_{t+1} + \gamma v_*(S_{t+1}) \mid S_t = s, A_t = a \right] \\
+       &= \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right].
+\end{align*}
+$$
+Tương tự cho action function value:
+$$
+\begin{align*}
+q_*(s, a) 
+&= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') \,\middle|\, S_t = s, A_t = a \right] \\
+&= \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \max_{a'} q_*(s', a') \right].
+\end{align*}
+$$
+
+==Lưu ý==: Công thức này chỉ khác với công thức trước đó (Bellman equation) ở chỗ là nó tìm max thay vì là $\mathbb{E}$. Có thể hiểu thế này:
+- Bellman equation: để một $v_{\pi}(s)$ là một value function, nó phải đáp ứng phương trình này.
+- Bellman optimal policy: để một $v_{\pi}(s)$ là một optimal policy, nó phải đáp ứng phương trình này, và tất nhiên cũng đáp ứng luôn Bellman equation.
+
+==Take away==:
+$$
+\begin{align*}
+v_*(s) &= \max_a \mathbb{E} \left[ R_{t+1} + \gamma v_*(S_{t+1}) \mid S_t = s, A_t = a \right] \\
+       &= \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_*(s') \right], \quad \text{or} \\
+q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') \mid S_t = s, A_t = a \right] \\
+         &= \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma \max_{a'} q_*(s', a') \right].
+\end{align*}
+$$
+
+#### Policy Evaluation
+
+Ý tưởng là đầu ta có một policy $\pi$, tuy nhiên ta chưa có $v$ tương ứng và ta muốn tính nó. Bắt đầu từ một $v_0$ tùy ý, ta update nó dần dần để $v_k$ trở nên chính xác.
+
+$$
+\begin{align*}
+v_{k+1}(s) &\doteq \mathbb{E}_\pi \left[ R_{t+1} + \gamma v_k(S_{t+1}) \mid S_t = s \right] \\
+          &= \sum_a \pi(a \mid s) \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_k(s') \right],
+\end{align*}
+$$
+Tức là ở đây sẽ có hai vòng for, một for ngoài sẽ xét điều kiện sai số đủ để hội tụ, for trong sẽ for toàn bộ $s$ để update.
+
+#### Policy Improvement
+
+Nhớ lại nhiệm vụ của ta là tìm ra policy tối ưu. Vậy làm cách nào? 
+Đơn giản, cũng bắt đầu từ một policy ngẫu nhiên $\pi_0$, ta policy evaluation để tính $v_{\pi_0}$, sau đó ta update policy của mình như sau:
+$$
+\begin{align*}
+\pi'(s) &\doteq \arg\max_a q_\pi(s, a) \\
+       &= \arg\max_a \mathbb{E} \left[ R_{t+1} + \gamma v_\pi(S_{t+1}) \mid S_t = s, A_t = a \right] \\
+       &= \arg\max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma v_\pi(s') \right],
+\end{align*}
+$$
+Hay nói cách khác, policy mới là greedy. 
+
+#### Policy iteration
+
+Kết hợp Value evaluation và policy iteration, ta được một thuật toán lặp để từ một policy $\pi_0$ tùy ý, ta tìm được optimal policy $\pi_*$. 
+
+$$
+\pi_0 
+\xrightarrow{\text{E}} v_{\pi_0} 
+\xrightarrow{\text{I}} \pi_1 
+\xrightarrow{\text{E}} v_{\pi_1} 
+\xrightarrow{\text{I}} \pi_2 
+\xrightarrow{\text{E}} \cdots 
+\xrightarrow{\text{I}} \pi_* 
+\xrightarrow{\text{E}} v_*,
+$$
+==Giả mã==:
+$$
+\begin{align*}
+&\textbf{1. Initialization} \\
+&\quad V(s) \in \mathbb{R} \text{ and } \pi(s) \in \mathcal{A}(s) \text{ arbitrarily for all } s \in \mathcal{S} \\[1ex]
+
+&\textbf{2. Policy Evaluation} \\
+&\textbf{Loop:} \\
+&\quad \Delta \leftarrow 0 \\
+&\quad \text{Loop for each } s \in \mathcal{S}: \\
+&\quad\quad v \leftarrow V(s) \\
+&\quad\quad V(s) \leftarrow \sum_{s', r} p(s', r \mid s, \pi(s)) \left[ r + \gamma V(s') \right] \\
+&\quad\quad \Delta \leftarrow \max(\Delta, |v - V(s)|) \\
+&\quad \text{until } \Delta < \theta\ \text{(a small positive threshold)} \\[1ex]
+
+&\textbf{3. Policy Improvement} \\
+&\quad policy\text{-}stable \leftarrow \text{true} \\
+&\quad \text{For each } s \in \mathcal{S}: \\
+&\quad\quad old\text{-}action \leftarrow \pi(s) \\
+&\quad\quad \pi(s) \leftarrow \arg\max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma V(s') \right] \\
+&\quad\quad \text{If } old\text{-}action \ne \pi(s) \text{ then } policy\text{-}stable \leftarrow \text{false} \\[1ex]
+
+&\text{If } policy\text{-}stable, \text{ then stop and return } V \approx v_* \text{ and } \pi \approx \pi_*; \text{ else go to 2}
+\end{align*}
+
+$$
+#### Value iteration
+
+Ý tưởng là ở bước Policy Evaluation, ta không cần chạy nhiều bước cho $v$ hội tụ mà thậm chí chỉ cần chạy 1 vòng lặp là được. Tức là ở policy iteration, bước policy evaluation được chạy $n$ lần để hội tụ, còn ở value iteration, policy evaluation có thể chạy một lần là được.
+
+==Giả mã==:
+$$
+\begin{align*}
+&\textbf{Algorithm parameter:} \ \theta > 0 \ \text{(small threshold for accuracy)} \\
+&\textbf{Initialize: } V(s), \text{ for all } s \in \mathcal{S}^+, \text{ arbitrarily except } V(\text{terminal}) = 0 \\[1ex]
+
+&\textbf{Loop:} \\
+&\quad \Delta \leftarrow 0 \\
+&\quad \text{Loop for each } s \in \mathcal{S}: \\
+&\quad\quad v \leftarrow V(s) \\
+&\quad\quad V(s) \leftarrow \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma V(s') \right] \\
+&\quad\quad \Delta \leftarrow \max(\Delta, |v - V(s)|) \\
+&\text{until } \Delta < \theta \\[1ex]
+
+&\textbf{Output a deterministic policy } \pi \approx \pi_* \text{ such that:} \\
+&\quad \pi(s) = \arg\max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma V(s') \right]
+\end{align*}
+$$
+
+==Take away==: Nếu so sánh giã mã trên với Policy Evaluation, chắc bạn thắc mắc bước Policy Improvement đâu rồi. Thực ra nó đã được tích hợp vào công thức cập nhật $V(s)$ bên trên rồi đó.
+#### Asynchronous 
+
+Cũng giống value iteration nhưng ở mức cực đoan hơn, tức là ở bước policy evaluation, đáng lẽ phải for qua toàn bộ $s \in \mathcal{S}$ mới được xem là một lặp, asynchronous chỉ cần update một một vài $s$, thậm chí có thể chỉ là một $s$ duy nhất.
+
+>To converge correctly, however, an asynchronous algorithm must continue to update the values of all the states: it can’t ignore any state after some point in the computation. 
+
+--- 
+
+## Monte Carlo Methods
+
+Ở phần trước, để tìm được $\pi_*$, ta phải biết dynamics của môi trường $p(s', r \mid s, a)$, đây là điều thường rất rất hiếm khi khả thi trong thực tế. Monte Carlo Methods cho ta một cách tiếp khác khi lúc này agent thực sự học từ kinh nghiệm thực tế, tức là thử và sai - tương tác với môi trường.
+
+Có thể hình dung Monte Carlo Methods như kiểu bạn lấy trung bình các số liệu trong thực tế trong một state $s$ cụ thể nào đó, theo luật số lớn, càng nhiều sample thì mean của ước lượng càng chính xác.
+
+==Lưu ý==: Do ta không có $p(s', r \mid s, a)$ nên việc ước lượng $q(s, a)$ sẽ có ích hơn là $v(s)$. 
+
+Lý do cho việc này rất đơn giản: nếu ta đang đứng ở $s$, làm sao ta biết được *nên làm gì* để đạt được return lớn nhất? Bạn có thể nghĩ rằng chỉ cần chọn $s'=\arg \max_{s'}v(s')$ là được, nhưng ôi bạn tôi ơi, chúng ta còn xác suất chuyển trạng thái nữa, tức là cái dynamics mà ta đang không biết. Lúc này $q(s, a)$ đưa cho ta một gợi ý cực kì đơn giản chọn $a = \arg \max_s q(s,a)$. 
+
+$$
+\begin{align*}
+&\textbf{Initialize:} \\
+&\quad \pi(s) \in \mathcal{A}(s)\ \text{(arbitrarily), for all } s \in \mathcal{S} \\
+&\quad Q(s, a) \in \mathbb{R}\ \text{(arbitrarily), for all } s \in \mathcal{S},\ a \in \mathcal{A}(s) \\
+&\quad Returns(s, a) \leftarrow \text{empty list, for all } s \in \mathcal{S},\ a \in \mathcal{A}(s) \\[1ex]
+
+&\textbf{Loop forever (for each episode):} \\
+&\quad \text{Choose } S_0 \in \mathcal{S},\ A_0 \in \mathcal{A}(S_0)\ \text{randomly such that all pairs have probability } > 0 \\
+&\quad \text{Generate an episode from } S_0, A_0,\ \text{following } \pi: \\
+&\quad\quad S_0, A_0, R_1, \dots, S_{T-1}, A_{T-1}, R_T \\
+&\quad G \leftarrow 0 \\
+
+&\quad \textbf{Loop for each step of episode},\ t = T{-}1, T{-}2, \dots, 0: \\
+&\quad\quad G \leftarrow \gamma G + R_{t+1} \\
+&\quad\quad \textbf{Unless the pair } (S_t, A_t) \text{ appears in } (S_0, A_0), \dots, (S_{t-1}, A_{t-1}): \\
+&\quad\quad\quad Returns(S_t, A_t) \leftarrow \text{append } G \\
+&\quad\quad\quad Q(S_t, A_t) \leftarrow \text{average}(Returns(S_t, A_t)) \\
+&\quad\quad\quad \pi(S_t) \leftarrow \arg\max_a Q(S_t, a)
+\end{align*}
+$$
+
+==Take away==: Có thể thấy giả mã trên là một dạng asynchronous, tức là tương tự như Value Iteration. Tuy nhiên ở Value Iteration, một vòng lặp cho mọi $s \in \mathcal{S}$ được thực hiện, còn ở đây chỉ cập nhật cho các $s$ xuất hiện trong episode.
+
+--- 
+
+Một vấn đề với Monte Carlo là tồn tại khả năng có một số $s$ không được ghé thăm, có thể là do policy hoặc dynamics hiện tại. Điều này đòi hỏi phải có các phương pháp đảm bảo xác suất ghét thăm các $s$ phải luôn $\ge 0$. Chúng ta sẽ tìm hiểu hai cách làm như vậy trong hai tình huống là on-policy method và off policy method.
+#### On-policy method
+
+Người ta thường dùng $\epsilon$-soft policy, tức là với xác xuất $\frac{\epsilon}{|\mathcal{A}(s)|}$, chọn action không greedy. $\epsilon$-soft greedy policy vẫn đảm bảo lớn hơn mọi $\epsilon$-soft policy khác như ở policy evaluation.  Tất nhiên là $\epsilon$-soft optimal policy không đảm bảo là policy tối ưu nhất, nó chỉ tối ưu trong các $\epsilon$-soft policy thôi.
+
+#### Off-policy method
+###### Important sampling
+
+$$
+\mathbb{E}_{p(x)}[f(x)] = \int f(x)\frac{p(x)}{q(x)}q(x) dx = \mathbb{E}_{q(x)}\left[f(x)\frac{p(x)}{q(x)}\right]
+$$
+Trong trường hợp này, công thức trên nói rằng: Nếu lấy data theo phân phối hiện tại là quá khó hoặc vì lí do gì đó mà muốn tránh, chỉ cần lấy theo phân phối khác, ta sẽ chuyển kết quả về lại phân phối gốc bằng important sampling.
+
+==Lưu ý==: Tùy vào trường hợp mà important sampling có variance cao, đặc biệt là khi hai phân phối quá khác nhau, ví dụ $p(x) = 0$ ở những nơi $q(x) \neq 0$  
+Xét một trajectory $A_t, S_t, A_{t +1}, S_{t+1} \dots S_T$, importance sampling ratio là:
+$$
+\rho_{t:T} \doteq \frac{
+    \prod_{k=t}^{T-1} \pi(A_k \mid S_k) p(S_{k+1} \mid S_k, A_k)
+}{
+    \prod_{k=t}^{T-1} b(A_k \mid S_k) p(S_{k+1} \mid S_k, A_k)
+}
+= \prod_{k=t}^{T-1} \frac{\pi(A_k \mid S_k)}{b(A_k \mid S_k)}.
+$$
+==Lưu ý==: Mặc dù ban đầu có xuất hiện dynamics, về sau chúng triệt tiêu lẫn nhau, chỉ còn lại hai policy.
+
+Nhắc lại, mục đích ban đầu của chúng ta là tính $v(s)$ cho $\pi$, tuy nhiên ta cần một policy khác lấy sample để đảm bao rằng các trạng thái $s$ được bao phủ, do đó behavior policy ở đây là $b$. Sau khi có $G_t$, ta chỉ cần áp dụng importance sampling là được: 
+
+$$
+\mathbb{E}[\rho_{t:T-1} G_t \mid S_t = s] = v_\pi(s).
+$$
+
+Monte Carlo là thuật toán lấy trung bình để ước lượng, do đó công thức có thể được viết lại là:
+$$
+\begin{align}
+V(s) &\doteq \frac{ \sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1} G_t }{ \lvert \mathcal{T}(s) \rvert }.\\
+V(s) &\doteq \frac{ \sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1} G_t }{ \sum_{t \in \mathcal{T}(s)} \rho_{t:T(t)-1} }, \space \text{weighted version}
+
+\end{align}
+$$
+#### Incremental Implementation
+
+Chúng ta cần tính:
+$$
+V_n \doteq \frac{ \sum_{k=1}^{n-1} W_k G_k }{ \sum_{k=1}^{n-1} W_k }, \quad n \geq 2,
+$$
+Với $W_i$ là bất kì weight nào, $W_i = 1$ thì sẽ trở về là tính trung bình cộng, $W_i = \rho_{t:T(t_i)-1}$ thì trở thành weighted với importance sampling.
+
+==Từ đây ta có thể suy ra công thức==:
+
+$$
+\begin{align}
+V_{n+1}  &\doteq V_n + \frac{W_n}{C_n} \left[ G_n - V_n \right], \quad n \geq 1 \\
+C_{n+1} &\doteq C_n + W_{n+1}
+\end{align}
+$$
+Chứng minh:
+
+$$
+\begin{align}
+V_{n+1} &= \frac{\sum_{k=1}^{n} W_k G_k}{\sum_{k=1}^{n}W_k}\\
+&=V_n + \frac{\sum_{k=1}^{n} W_k G_k}{\sum_{k=1}^{n}W_k} - \frac{\sum_{k=1}^{n-1} W_k G_k}{\sum_{k=1}^{n-1}W_k}\\
+&=V_n + \frac{\sum_{k=1}^{n} W_k G_k \sum_{k=1}^{n-1} W_k - \sum_{k=1}^{n-1} W_k G_k \sum_{k=1}^{n} W_k}{\sum_{k=1}^{n} W_k\sum_{k=1}^{n-1} W_k}
+\end{align}
+$$
+
+Để vậy thì hơi khó thấy, đặt:
+$$
+\begin{align}
+a &= \sum_{k=1}^{n} W_k G_k\\
+b &= \sum_{k=1}^{n-1} W_k
+\end{align}
+$$
+Phương trình to ở trên trở thành:
+$$
+\begin{align}
+V_{n+1} &= V_n + \frac{ab - (a - W_n G_n)(b + W_n)}{\sum_{k=1}^{n} W_k \sum_{k=1}^{n-1} W_k}\\
+&= V_n + \frac{ab - ab -aW_n +W_n G_n b + W_n^2 G_n}{\sum_{k=1}^{n} W_k \sum_{k=1}^{n-1} W_k}\\
+&= V_n + \frac{W_n G_n \sum_{k=1}^{n-1} W_k}{\sum_{k=1}^{n} W_k \sum_{k=1}^{n-1} W_k} - \frac{W_n(\sum_{k=1}^{n} W_k G_k - W_nG_n)}{\sum_{k=1}^{n} W_k \sum_{k=1}^{n-1} W_k}\\
+&= V_n + \frac{W_n G_n}{\sum_{k=1}^{n} W_k} - \frac{W_n}{\sum_{k=1}^{n} W_k}V_n \\
+&= V_n + \frac{W_n}{\sum_{k=1}^{n} W_k}(G_n - V_n) 
+\end{align}
+$$
+
+Vl format mỏi lưng quá, thôi xem tạm đi, có vài chỗ hơi tắt xíu=))))))
+
+$$
+\begin{align}
+&\textbf{Initialize:} \nonumber \\
+&\quad Q(s,a) \in \mathbb{R} \quad \text{(arbitrarily)}, \quad \forall s \in \mathcal{S}, a \in \mathcal{A}(s) \\
+&\quad C(s,a) \leftarrow 0 \\
+&\quad \pi(s) \leftarrow \arg\max_a Q(s,a) \quad \text{(with ties broken consistently)} \\
+\nonumber \\
+&\textbf{Loop forever (for each episode):} \nonumber \\
+&\quad b \leftarrow \text{any soft policy} \\
+&\quad \text{Generate an episode using } b: \quad S_0, A_0, R_1, \ldots, S_{T-1}, A_{T-1}, R_T \\
+&\quad G \leftarrow 0 \\
+&\quad W \leftarrow 1 \\
+&\quad \textbf{For } t = T{-}1, T{-}2, \ldots, 0: \nonumber \\
+&\qquad G \leftarrow \gamma G + R_{t+1} \\
+&\qquad C(S_t, A_t) \leftarrow C(S_t, A_t) + W \\
+&\qquad Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \frac{W}{C(S_t, A_t)} \left[ G - Q(S_t, A_t) \right] \\
+&\qquad \pi(S_t) \leftarrow \arg\max_a Q(S_t, a) \quad \text{(with ties broken consistently)} \\
+&\qquad \text{If } A_t \ne \pi(S_t) \text{ then break (proceed to next episode)} \\
+&\qquad W \leftarrow W\frac{1}{b(A_t \mid S_t)}
+\end{align}
+$$
+
+Tuy nhiên có một điểm rất cần lưu ý là trong thuật toán trên, điều kiện if dừng lại khi $A_t$ của behavior policy khác với policy hiện tại. Điều này là bởi sự ảnh hưởng của importance sampling khi nếu điều kiện if xảy ra, importance sampling ratio sẽ ngay lập tức $=0$ trong các vòng lặp tiếp đó. Điều này khiến cho thuật toán có khả năng lãng phí rất nhiều data của một episode.
+
+---
+## Giảm variance cho Importance Sampling
+
+Mình chưa bao giờ thực nghiệm cái này, tuy nhiên có một điểm đáng lưu ý trong sách là tác giả luôn trình bày những cách để làm giảm phương sai cho Importance sampling. Tuy nhiên ở lần đầu mình đọc sách thì không có cảm giác rằng điều này là quan trọng, ở lần thứ hai đọc qua thì mình mới để ý kĩ nó hơn. 
+
+#### Discounting-aware Importance Sampling
+
+Trong phần này tác giả biến đổi công thức rất ảo ma để có thể giảm được variance. Tác giả giải thích cái này trong sách rất khó hiểu, mình không nắm được ở lần đầu đọc, tuy nhiên lần thứ hai đọc qua thì có nắm được một vài ý chính. Theo cảm nhận của mình thì cứ đừng giải thích gì cả, cứ bảo rằng chúng ta đang biến đổi toán học để có thể tách được Importance sampling ratio ra là dễ hiểu nhất cmnr=))))
+
+
+Nhớ lại return được định nghĩa là:
+$$
+G_t \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots \gamma^{T- t-1}R_{T}
+$$
+Và trong công thức Importance Sampling:
+$$
+V(s) \doteq \frac{ \sum_{t \in \mathcal{T}(s)} \rho_{t:T-1} G_t }{ \lvert \mathcal{T}(s) \rvert }.
+$$
+Ý tưởng là ở đây $\rho_{t:T(t)-1}$ và $G_t$ đang được nhân lại với nhau, và $G_t$ thì lại có thể phân tích ra thành các $R_i$, có khả năng giảm variance được. 
+
+Tiếp đến ta biến đổi $G_t$ thành:
+
+$$
+\begin{align}
+G_t \doteq\;& R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T - t - 1} R_T \\
+=\;& (1 - \gamma) R_{t+1} \nonumber \\
+&+ (1 - \gamma) \gamma (R_{t+1} + R_{t+2}) \nonumber \\
+&+ (1 - \gamma) \gamma^2 (R_{t+1} + R_{t+2} + R_{t+3}) \nonumber \\
+&\quad \vdots \nonumber \\
+&+ (1 - \gamma) \gamma^{T - t - 2} (R_{t+1} + R_{t+2} + \cdots + R_{T-1}) \nonumber \\
+&+ \gamma^{T - t - 1} (R_{t+1} + R_{t+2} + \cdots + R_T) \\
+=\;& (1 - \gamma) \sum_{h = t+1}^{T - 1} \gamma^{h - t - 1} \bar{G}_{t:h} + \gamma^{T - t - 1} \bar{G}_{t:T}.
+\end{align}
+$$
+Sao nghĩ ra được cái này ý hả, bố ai mà biết dc=))))))))
+
+Tiếp đến, ta nhận thấy rằng ở mỗi term $\bar{G}_{t:h}$ chỉ phụ thuộc vào $R_{t:h}$ thôi nên hệ số importance sampling ở đằng sau có thể được lược bỏ, dẫn đến công thức bên dưới đây: 
+$$
+\begin{align}
+V(s) \doteq \frac{
+    \sum_{t \in \mathcal{T}(s)} \left(
+        (1 - \gamma) \sum_{h = t+1}^{T(t)-1} \gamma^{h - t - 1} \rho_{t:h-1} \, \bar{G}_{t:h}
+        + \gamma^{T(t) - t - 1} \rho_{t:T(t)-1} \, \bar{G}_{t:T(t)}
+    \right)
+}{
+    \lvert \mathcal{T}(s) \rvert
+}, \tag{5.9}
+\end{align}
+$$
+
+hoặc phiên bản weighted:
+
+$$
+\begin{align}
+V(s) \doteq 
+\frac{
+    \sum_{t \in \mathcal{T}(s)} \left(
+        (1 - \gamma) \sum_{h = t+1}^{T(t)-1} \gamma^{h - t - 1} \rho_{t:h-1} \, \bar{G}_{t:h}
+        + \gamma^{T(t) - t - 1} \rho_{t:T(t)-1} \, \bar{G}_{t:T(t)}
+    \right)
+}{
+    \sum_{t \in \mathcal{T}(s)} \left(
+        (1 - \gamma) \sum_{h = t+1}^{T(t)-1} \gamma^{h - t - 1} \rho_{t:h-1}
+        + \gamma^{T(t) - t - 1} \rho_{t:T(t)-1}
+    \right)
+}. \tag{5.10}
+\end{align}
+$$
+Nhìn thì kinh dị nhưng thực ra nó vẫn giống công thức Importance Sampling ban đầu thôi, khác ở chỗ hệ số Importance Sampling bị lược bỏ đi (lược bỏ xong dài hơn ban đầu :D). 
+
+Chứng minh cái cục trên giảm được bao nhiêu variance so với công thức gốc thì mình chịu, toán không phải là thứ mình được sinh ra để làm=)))))
+
+#### Per-decision Importance Sampling
+
+Cái này mình thấy đọc dễ hiểu hơn này, nó có insight dễ chịu hơn. 
+Đầu tiên ta xem xét công thức cho $G_t$
+$$
+\begin{align}
+\rho_{t:T-1} G_t 
+&= \rho_{t:T-1} \left( R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{T - t - 1} R_T \right) \\
+&= \rho_{t:T-1} R_{t+1} + \gamma \rho_{t:T-1} R_{t+2} + \cdots + \gamma^{T - t - 1} \rho_{t:T-1} R_T.
+\end{align}
+$$
+Cũng giống như phần trước, có thể bạn đã để ý, $\rho_{t:T-1}$ bị "dư"  một khúc ở phía sau so với $R_{t+1}$, do đó công thức có thể được viết lại là:
+
+$$
+\begin{align}
+\widetilde{G}_t =\;& \rho_{t:t} R_{t+1} 
++ \gamma \rho_{t:t+1} R_{t+2} 
++ \gamma^2 \rho_{t:t+2} R_{t+3} 
++ \cdots 
++ \gamma^{T - t - 1} \rho_{t:T-1} R_T.
+\end{align}
+$$
+Và công thức tính $V(s)$:
+$$
+V(s) \doteq \frac{ \sum_{t \in \mathcal{T}(s)} \widetilde{G}_t }{ \lvert \mathcal{T}(s) \rvert }
+$$
+
+---
+
+## Temporal-Difference Learning
+
+Nhớ lại công thức cập nhật theo style incremental đã được chứng minh từ đâu:
+$$
+\begin{align}
+V(S_t) \leftarrow V(S_t) + \alpha \left[ G_t - V(S_t) \right],
+\end{align}
+$$
+==Ta chỉ cần biến đổi Gt bên trong==:
+$$
+\begin{align}
+V(S_t) \leftarrow V(S_t) + \alpha \left[ R_{t+1} + \gamma V(S_{t+1}) - V(S_t) \right]
+\end{align}
+$$
+
+> Điều này có nghĩa gì?
+
+Có chứ, công thức ban đầu là Monte Carlo method, ta chỉ có $G_t$ sau khi toàn bộ episode. Tức là mọi giá trị ($v$ hay $q$) ta dùng trong suốt quá trình lấy mẫu đều là giá trị cũ. Còn công thức biến đổi, mỗi khi bạn take action, ta có ngay $R_{t+1}$ cũng như $V(S_{t+1})$ - cái mà thực chất chỉ là giá trị cũ, tức là ta có một thuật toán online learning.
 
