@@ -514,8 +514,293 @@ $$
 V(S_t) \leftarrow V(S_t) + \alpha \left[ R_{t+1} + \gamma V(S_{t+1}) - V(S_t) \right]
 \end{align}
 $$
+Ta có được điều này là do:
+$$
+\begin{align}
+v_\pi(s) &\doteq \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] \\
+        &= \mathbb{E}_\pi \left[ R_{t+1} + \gamma G_{t+1} \mid S_t = s \right] \\
+        &= \mathbb{E}_\pi \left[ R_{t+1} + \gamma v_\pi(S_{t+1}) \mid S_t = s \right].
+\end{align}
+$$
 
-> Điều này có nghĩa gì?
+> Việc biến đổi này có nghĩa gì?
 
 Có chứ, công thức ban đầu là Monte Carlo method, ta chỉ có $G_t$ sau khi toàn bộ episode. Tức là mọi giá trị ($v$ hay $q$) ta dùng trong suốt quá trình lấy mẫu đều là giá trị cũ. Còn công thức biến đổi, mỗi khi bạn take action, ta có ngay $R_{t+1}$ cũng như $V(S_{t+1})$ - cái mà thực chất chỉ là giá trị cũ, tức là ta có một thuật toán online learning.
+
+==Giả mã==:
+$$
+\begin{align}
+&\textbf{Input:} \text{ the policy } \pi \text{ to be evaluated} \\
+&\text{Algorithm parameter: step size } \alpha \in (0,1] \\
+&\text{Initialize } V(s), \; \forall s \in \mathcal{S}^+, \text{ arbitrarily except that } V(\text{terminal}) = 0 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize } S \\
+&\quad \textbf{Loop for each step of episode:} \nonumber \\
+&\qquad A \leftarrow \pi(S) \\
+&\qquad \text{Take action } A, \text{ observe } R, S' \\
+&\qquad V(S) \leftarrow V(S) + \alpha \left[ R + \gamma V(S') - V(S) \right] \\
+&\qquad S \leftarrow S' \\
+&\quad \text{until } S \text{ is terminal}
+\end{align}
+$$
+
+
+Có một định lượng khá quan trọng (ít nhất là mình thấy vậy) là TD-error:
+$$
+\begin{align}
+\delta_t \doteq R_{t+1} + \gamma V(S_{t+1}) - V(S_t).
+\end{align}
+$$Và công thức Monte Carlo cũng có thể được viết lại dưới dạng tổng của các TD-errors:
+$$
+\begin{align}
+G_t - V(S_t) 
+&= R_{t+1} + \gamma G_{t+1} - V(S_t) + \gamma V(S_{t+1}) - \gamma V(S_{t+1})  \\
+&= \delta_t + \gamma (G_{t+1} - V(S_{t+1})) \\
+&= \delta_t + \gamma \delta_{t+1} + \gamma^2 (G_{t+2} - V(S_{t+2})) \\
+&= \delta_t + \gamma \delta_{t+1} + \gamma^2 \delta_{t+2} + \cdots + \gamma^{T - t - 1} \delta_{T-1} + \gamma^{T - t} (G_T - V(S_T)) \\
+&= \delta_t + \gamma \delta_{t+1} + \gamma^2 \delta_{t+2} + \cdots + \gamma^{T - t - 1} \delta_{T-1} + \gamma^{T - t} (0 - 0) \\
+&= \sum_{k = t}^{T - 1} \gamma^{k - t} \delta_k. \tag{6.6}
+\end{align}
+$$
+
+==TD maximum-likelihood trong khi Monte Carlo minimize mean square error==
+
+---
+
+## SARSA
+
+$$
+\begin{align}
+Q(S_t, A_t) \leftarrow Q(S_t, A_t) + \alpha \left[ R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}) - Q(S_t, A_t) \right].
+\end{align}
+$$
+Lí do nó tên là SARSA là để tính được $Q(S_t, A_t)$, ta cần một bộ:
+$$
+S_t, A_t, R_{t+1}, S_{t+1}, A_{t+1}
+$$
+
+==Giả mã==:
+$$
+\begin{align}
+&\textbf{Algorithm parameters:} \quad \alpha \in (0, 1], \quad \varepsilon > 0 \\
+&\text{Initialize } Q(s,a), \quad \forall s \in \mathcal{S}^+,\, a \in \mathcal{A}(s), \text{ arbitrarily except } Q(\text{terminal}, \cdot) = 0 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize } S \\
+&\quad \text{Choose } A \text{ from } S \text{ using policy derived from } Q \text{ (e.g., } \varepsilon\text{-greedy)} \\
+&\quad \textbf{Loop for each step of episode:} \nonumber \\
+&\qquad \text{Take action } A, \text{ observe } R, S' \\
+&\qquad \text{Choose } A' \text{ from } S' \text{ using policy derived from } Q \text{ (e.g., } \varepsilon\text{-greedy)} \\
+&\qquad Q(S, A) \leftarrow Q(S, A) + \alpha \left[ R + \gamma Q(S', A') - Q(S, A) \right] \\
+&\qquad S \leftarrow S', \quad A \leftarrow A' \\
+&\quad \text{until } S \text{ is terminal}
+\end{align}
+$$
+
+
+---
+
+## Q-Learning
+
+Q-learning giống như SARSA nhưng là off-policy:
+$$
+\begin{align}
+Q(S_t, A_t) \leftarrow Q(S_t, A_t) 
++ \alpha \left[ R_{t+1} + \gamma \max_a Q(S_{t+1}, a) - Q(S_t, A_t) \right].
+\end{align}
+$$
+==Giả mã==:
+$$
+\begin{align}
+&\textbf{Algorithm parameters:} \quad \alpha \in (0, 1], \quad \varepsilon > 0 \\
+&\text{Initialize } Q(s,a), \quad \forall s \in \mathcal{S}^+,\, a \in \mathcal{A}(s), \text{ arbitrarily except } Q(\text{terminal}, \cdot) = 0 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize } S \\
+&\quad \textbf{Loop for each step of episode:} \nonumber \\
+&\qquad \text{Choose } A \text{ from } S \text{ using policy derived from } Q \text{ (e.g., } \varepsilon\text{-greedy)} \\
+&\qquad \text{Take action } A, \text{ observe } R, S' \\
+&\qquad Q(S, A) \leftarrow Q(S, A) + \alpha \left[ R + \gamma \max_{a} Q(S', a) - Q(S, A) \right] \\
+&\qquad S \leftarrow S' \\
+&\quad \text{until } S \text{ is terminal}
+\end{align}
+$$
+
+---
+
+## Expected SARSA
+
+Mình không hiểu tại sao nhưng mọi người cứ bảo cái này giống  Q-learning hơn, mình thấy giống cả hai, chủ yếu là tên gọi cho dễ nhớ thôi.
+$$
+\begin{align}
+Q(S_t, A_t) 
+&\leftarrow Q(S_t, A_t) + \alpha \left[ R_{t+1} + \gamma \, \mathbb{E}_\pi \left[ Q(S_{t+1}, A_{t+1}) \mid S_{t+1} \right] - Q(S_t, A_t) \right] \\
+&\leftarrow Q(S_t, A_t) + \alpha \left[ R_{t+1} + \gamma \sum_{a} \pi(a \mid S_{t+1}) Q(S_{t+1}, a) - Q(S_t, A_t) \right].
+\end{align}
+$$
+
+---
+
+## Double Learning
+
+Giống như trong Q-learning, tuy nhiên việc dùng cùng một $Q(s, a)$ cho việc ước lượng cũng như chọn hành động để update có thể mang bias cao, thay vào đó có thể chia làm hai hàm $Q_1(s, a)$ và $Q_2(s, a)$ khác nhau. 
+
+==Giả mã==: Ước tính $Q_1 \approx Q_2 \approx q_*$  
+$$
+\begin{align}
+&\textbf{Algorithm parameters:} \quad \alpha \in (0, 1], \quad \varepsilon > 0 \\
+&\text{Initialize } Q_1(s,a) \text{ and } Q_2(s,a), \quad \forall s \in \mathcal{S}^+,\, a \in \mathcal{A}(s), \text{ such that } Q(\text{terminal}, \cdot) = 0 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize } S \\
+&\quad \textbf{Loop for each step of episode:} \nonumber \\
+&\qquad \text{Choose } A \text{ from } S \text{ using } \varepsilon\text{-greedy policy derived from } Q_1 + Q_2 \\
+&\qquad \text{Take action } A, \text{ observe } R, S' \\
+&\qquad \text{With probability } 0.5: \nonumber \\
+&\qquad\quad Q_1(S, A) \leftarrow Q_1(S, A) + \alpha \left[ R + \gamma Q_2\left(S', \arg\max_a Q_1(S', a) \right) - Q_1(S, A) \right] \\
+&\qquad \text{else:} \nonumber \\
+&\qquad\quad Q_2(S, A) \leftarrow Q_2(S, A) + \alpha \left[ R + \gamma Q_1\left(S', \arg\max_a Q_2(S', a) \right) - Q_2(S, A) \right] \\
+&\qquad S \leftarrow S' \\
+&\quad \text{until } S \text{ is terminal}
+\end{align}
+$$
+
+--- 
+
+## n-step Bootstrapping
+
+TD chỉ cần một step, Monte Carlo đợi đến khi hết một episode. Xét return của n-step:
+$$
+\begin{align}
+G_{t:t+n} &\doteq R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n V_{t+n-1}(S_{t+n}) \\
+V_{t+n}(S_t) &\doteq V_{t+n-1}(S_t) + \alpha \left[ G_{t:t+n} - V_{t+n-1}(S_t) \right],
+\end{align}
+$$
+
+==Giả mã==: n-step TD ước lượng cho $V \approx v_{\pi}$
+$$
+\begin{align}
+&\textbf{Input:} \text{ a policy } \pi \\
+&\text{Algorithm parameters: step size } \alpha \in (0, 1], \text{ a positive integer } n \\
+&\text{Initialize } V(s) \text{ arbitrarily, for all } s \in \mathcal{S} \\
+&\text{All store/access operations use index mod } n+1 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize and store } S_0 \ne \text{terminal} \\
+&\quad T \leftarrow \infty \\
+&\quad \textbf{Loop for } t = 0, 1, 2, \ldots: \nonumber \\
+&\qquad \text{If } t < T \text{ then:} \nonumber \\
+&\qquad\quad \text{Take action } A_t \sim \pi(\cdot \mid S_t) \\
+&\qquad\quad \text{Observe and store reward } R_{t+1} \text{ and next state } S_{t+1} \\
+&\qquad\quad \text{If } S_{t+1} \text{ is terminal, then } T \leftarrow t+1 \\
+&\qquad \tau \leftarrow t - n + 1 \quad \text{(time whose estimate is being updated)} \\
+&\qquad \text{If } \tau \ge 0 \text{ then:} \nonumber \\
+&\qquad\quad G \leftarrow \sum_{i = \tau+1}^{\min(\tau+n, T)} \gamma^{i - \tau - 1} R_i \\
+&\qquad\quad \text{If } \tau + n < T \text{ then:} \nonumber \\
+&\qquad\qquad G \leftarrow G + \gamma^n V(S_{\tau+n}) \\
+&\qquad\quad V(S_\tau) \leftarrow V(S_\tau) + \alpha \left[ G - V(S_\tau) \right] \\
+&\quad \text{until } \tau = T - 1
+\end{align}
+$$
+
+---
+
+## n-step SARSA
+
+$$
+\begin{align}
+G_{t:t+n} \doteq R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} 
++ \gamma^n Q_{t+n-1}(S_{t+n}, A_{t+n}),
+\quad n \ge 1,\; 0 \le t < T - n. 
+\end{align}
+$$
+
+$$
+\begin{align}
+Q_{t+n}(S_t, A_t) \doteq Q_{t+n-1}(S_t, A_t) 
++ \alpha \left[ G_{t:t+n} - Q_{t+n-1}(S_t, A_t) \right], 
+\quad 0 \le t < T,
+\end{align}
+$$
+
+==Giả mã==:
+$$
+\begin{align}
+&\text{Initialize } Q(s,a) \text{ arbitrarily, for all } s \in \mathcal{S}, a \in \mathcal{A} \\
+&\text{Initialize } \pi \text{ to be } \varepsilon\text{-greedy w.r.t. } Q \text{ or to a fixed policy} \\
+&\text{Algorithm parameters: } \alpha \in (0,1], \; \varepsilon > 0, \; n \in \mathbb{Z}^+ \\
+&\text{All access operations use indices mod } n+1 \\
+\nonumber \\
+&\textbf{Loop for each episode:} \nonumber \\
+&\quad \text{Initialize and store } S_0 \ne \text{terminal} \\
+&\quad \text{Select and store action } A_0 \sim \pi(\cdot \mid S_0) \\
+&\quad T \leftarrow \infty \\
+&\quad \textbf{Loop for } t = 0,1,2,\ldots: \nonumber \\
+&\qquad \text{If } t < T: \nonumber \\
+&\qquad\quad \text{Take action } A_t \\
+&\qquad\quad \text{Observe and store reward } R_{t+1} \text{ and state } S_{t+1} \\
+&\qquad\quad \text{If } S_{t+1} \text{ is terminal: } T \leftarrow t + 1 \\
+&\qquad\quad \text{else: select and store } A_{t+1} \sim \pi(\cdot \mid S_{t+1}) \\
+&\qquad \tau \leftarrow t - n + 1 \\
+&\qquad \text{If } \tau \ge 0: \nonumber \\
+&\qquad\quad G \leftarrow \sum_{i = \tau+1}^{\min(\tau+n, T)} \gamma^{i - \tau - 1} R_i \\
+&\qquad\quad \text{If } \tau + n < T: \nonumber \\
+&\qquad\qquad G \leftarrow G + \gamma^n Q(S_{\tau+n}, A_{\tau+n}) \\
+&\qquad\quad Q(S_\tau, A_\tau) \leftarrow Q(S_\tau, A_\tau) + \alpha \left[ G - Q(S_\tau, A_\tau) \right] \\
+&\qquad\quad \text{If } \pi \text{ is being learned, ensure } \pi(\cdot \mid S_\tau) \text{ is } \varepsilon\text{-greedy w.r.t. } Q \\
+&\quad \text{Until } \tau = T - 1
+\end{align}
+$$
+
+---
+
+## n-step Off-policy Learning
+
+$$
+\begin{align}
+V_{t+n}(S_t) &\doteq V_{t+n-1}(S_t) + \alpha \rho_{t:t+n-1} \left[ G_{t:t+n} - V_{t+n-1}(S_t) \right], \quad 0 \leq t < T\\
+Q_{t+n}(S_t, A_t) &\doteq Q_{t+n-1}(S_t, A_t) + \alpha \rho_{t+1:t+n} \left[ G_{t:t+n} - Q_{t+n-1}(S_t, A_t) \right]
+
+\end{align}
+$$
+
+==Giả mã==:
+$$
+\begin{align*}
+&\textbf{Input: } \text{behavior policy } b \text{ s.t. } b(a|s) > 0,\ \forall s \in \mathcal{S},\ a \in \mathcal{A} \\
+&\text{Initialize } Q(s,a)\ \text{arbitrarily},\ \forall s \in \mathcal{S},\ a \in \mathcal{A} \\
+&\text{Initialize } \pi \text{ to be greedy w.r.t. } Q \text{ or fixed} \\
+&\text{Set step size } \alpha \in (0,1],\ \text{positive integer } n \\
+&\text{Use cyclic buffer of size } n+1 \text{ for } S_t,\ A_t,\ R_t \\[1ex]
+
+&\textbf{Loop for each episode:} \\
+&\quad \text{Initialize and store } S_0 \ne \text{terminal} \\
+&\quad \text{Select and store } A_0 \sim b(\cdot|S_0) \\
+&\quad T \leftarrow \infty \\
+
+&\quad \textbf{Loop for } t = 0,1,2,\dots: \\
+&\quad\quad \textbf{If } t < T: \\
+&\quad\quad\quad \text{Take action } A_t \\
+&\quad\quad\quad \text{Observe and store } R_{t+1},\ S_{t+1} \\
+&\quad\quad\quad \textbf{If } S_{t+1} \text{ is terminal:} \\
+&\quad\quad\quad\quad T \leftarrow t + 1 \\
+&\quad\quad\quad \textbf{else:} \\
+&\quad\quad\quad\quad \text{Select and store } A_{t+1} \sim b(\cdot | S_{t+1}) \\
+
+&\quad\quad \tau \leftarrow t - n + 1 \quad \text{(time to update)} \\[1ex]
+
+&\quad\quad \textbf{If } \tau \ge 0: \\
+&\quad\quad\quad \rho \leftarrow \prod_{i=\tau+1}^{\min(\tau+n-1,T-1)} \frac{\pi(A_i|S_i)}{b(A_i|S_i)} \\
+&\quad\quad\quad G \leftarrow \sum_{i=\tau+1}^{\min(\tau+n,T)} \gamma^{i-\tau-1} R_i \\
+&\quad\quad\quad \textbf{If } \tau+n < T: \\
+&\quad\quad\quad\quad G \leftarrow G + \gamma^n Q(S_{\tau+n}, A_{\tau+n}) \\
+&\quad\quad\quad Q(S_\tau, A_\tau) \leftarrow Q(S_\tau, A_\tau) + \alpha \rho \left( G - Q(S_\tau, A_\tau) \right) \\
+
+&\quad\quad\quad \textbf{If } \pi \text{ is being learned:} \\
+&\quad\quad\quad\quad \pi(\cdot | S_\tau) \leftarrow \text{greedy w.r.t. } Q \\
+
+&\textbf{Until } \tau = T - 1
+\end{align*}
+$$
 
