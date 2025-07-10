@@ -115,3 +115,9 @@ Có vài lưu ý về phần này và phần volume mount mà vẫn chưa hiểu
 - `build`: để build image từ source code
 - `models`: run model llm với giao diện chat có sẵn (adu)
 - `mcp serve`: cái này mới
+
+---
+
+## Docker commit
+
+Ví dụ bạn chạy một image, cài thêm vài thứ vào môi trường, câu hỏi tự nhiên là giờ muốn giữ lại cái môi trường đó thì phải làm sao? Đơn giản, docker commit cho phép save lại container đó như một image riêng để sau này dùng.

@@ -1,9 +1,5 @@
-- host lưu mật khẩu: vaultwarden
-- host cloud: nextcloud
-- host word press
+- ManagerBase
 - Excalidraw
-- test n8n jarvis
 - Các công cụ trong nghiên cứu học thuật nói chung và machine learning nói riêng
 - Nâng cấp github page và Linkedin
-- Học tiếp về làm con robot
 - Manage my calendar
