@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
+                "file": "To-do list.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Revise Reinforcement Learning by Barto and Sutton"
+              "title": "To-do list"
             }
           },
           {
@@ -213,23 +213,24 @@
   },
   "active": "03f12c7863861004",
   "lastOpenFiles": [
+    "1. Rough Notes/Xấp xỉ Taylor.md",
+    "To-do list.md",
+    "Pasted image 20250716015431.png",
+    "Gymnasium.md",
+    "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
     "4. Tags/Reinforcement Learning.md",
     "Reinforcement Papers.md",
     "1. Rough Notes/Manager Based Environment and Config.md",
     "1. Rough Notes/Một số công cụ dùng cho việc nghiên cứu.md",
     "6. Main Notes/Danh mục xếp hạng tạp chí khoa học.md",
-    "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
     "4. Tags/Reading.md",
     "4. Tags/Markdown.md",
     "4. Tags/Listening.md",
     "4. Tags/LibTorch.md",
     "4. Tags/LaTeX.md",
     "4. Tags/Isaaclab.md",
-    "Pasted image 20250716015431.png",
     "1. Rough Notes/Gymnasium.md",
     "6. Main Notes/Python Logging.md",
-    "Gymnasium.md",
-    "To-do list.md",
     "3. Source Materials/Visuals/Pasted image 20250715223932.png",
     "Training Agent.md",
     "4. Tags/Gymnasium.md",
@@ -248,7 +249,6 @@
     "3. Source Materials/Visuals/Pasted image 20250713201825.png",
     "3. Source Materials/Visuals/Pasted image 20250713163130.png",
     "3. Source Materials/Visuals/Pasted image 20250713163003.png",
-    "6. Main Notes/Docker Fundamental.md",
     "2. Achieve",
     "Untitled.canvas",
     "Untitled 1.canvas",
