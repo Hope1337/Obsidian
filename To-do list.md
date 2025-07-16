@@ -1,4 +1,4 @@
-- ManagerBase
+- Tìm hiểu thêm về các phương pháp học critic 
 - Excalidraw
 - Các công cụ trong nghiên cứu học thuật nói chung và machine learning nói riêng
 - Nâng cấp github page và Linkedin

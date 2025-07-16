@@ -24,6 +24,8 @@ Q_{n+1} &= \frac{R_1 + R_2 + \dots + R_{n}}{n}\\
 &= Q_n + \frac{1}{n}[R_n - Q_n]
 \end{align}
 $$
+==Lưu ý==: Công thức trên là cho trường hợp đơn giản, đáng lẽ phải thay $R_i$ bằng $G_i$ mới đúng.
+
 Trong cài đặt, người ta sẽ thay $\frac{1}{n}$ thành $\alpha$, và công thức này sẽ được bắt gặp rất nhiều lần sau này: $Q[s] = Q[s] + \alpha(R + Q[s])$, điều này cũng được áp dụng với value function. Lưu ý thêm là công thức bên trên đang tập trung vào một action duy nhất để đơn giản hóa kí hiệu.
 
 Khi step size $\alpha \in (0,1]$, $Q_{n+1}$ sẽ là trung bình cộng có trọng số của tất cả các $R_i$ trước đó.
@@ -304,9 +306,19 @@ $$
 Trong trường hợp này, công thức trên nói rằng: Nếu lấy data theo phân phối hiện tại là quá khó hoặc vì lí do gì đó mà muốn tránh, chỉ cần lấy theo phân phối khác, ta sẽ chuyển kết quả về lại phân phối gốc bằng important sampling.
 
 ==Lưu ý==: Tùy vào trường hợp mà important sampling có variance cao, đặc biệt là khi hai phân phối quá khác nhau, ví dụ $p(x) = 0$ ở những nơi $q(x) \neq 0$  
-Xét một trajectory $A_t, S_t, A_{t +1}, S_{t+1} \dots S_T$, importance sampling ratio là:
+Xét một trajectory $A_t, S_t, A_{t +1}, S_{t+1} \dots S_T$, ta có:
+
 $$
-\rho_{t:T} \doteq \frac{
+\begin{align*}
+\Pr\{ A_t, S_{t+1}, A_{t+1}, \ldots, S_T \mid S_t, A_{t:T-1} \sim \pi \}
+&= \pi(A_t \mid S_t) p(S_{t+1} \mid S_t, A_t) \pi(A_{t+1} \mid S_{t+1}) \cdots p(S_T \mid S_{T-1}, A_{T-1}) \\
+&= \prod_{k=t}^{T-1} \pi(A_k \mid S_k) p(S_{k+1} \mid S_k, A_k),
+\end{align*}
+$$
+
+importance sampling ratio là:
+$$
+\rho_{t:T-1} \doteq \frac{
     \prod_{k=t}^{T-1} \pi(A_k \mid S_k) p(S_{k+1} \mid S_k, A_k)
 }{
     \prod_{k=t}^{T-1} b(A_k \mid S_k) p(S_{k+1} \mid S_k, A_k)
@@ -403,6 +415,8 @@ Tuy nhiên có một điểm rất cần lưu ý là trong thuật toán trên, 
 ## Giảm variance cho Importance Sampling
 
 Mình chưa bao giờ thực nghiệm cái này, tuy nhiên có một điểm đáng lưu ý trong sách là tác giả luôn trình bày những cách để làm giảm phương sai cho Importance sampling. Tuy nhiên ở lần đầu mình đọc sách thì không có cảm giác rằng điều này là quan trọng, ở lần thứ hai đọc qua thì mình mới để ý kĩ nó hơn. 
+
+==Lưu ý==: phương pháp này chỉ dùng cho
 
 #### Discounting-aware Importance Sampling
 
@@ -804,3 +818,157 @@ $$
 \end{align*}
 $$
 
+---
+
+## Per-decision Methods with Control Variates
+
+Tương tự như Monte Carlo method, ta cũng có một số cách để giảm variance.
+Đầu tiên phải nhắc lại công thức tính $V$ và $Q$:
+
+$$
+\begin{align}
+V_\pi(s) &= \mathbb{E}_\pi \left[ G_t \mid S_t = s \right] \\
+Q_\pi(s, a) &= \mathbb{E}_\pi \left[ G_t \mid S_t = s, A_t = a \right] 
+\end{align}
+$$
+Tức là dù tính kiểu gì, công thức nào thì cũng là biến đổi của công thức trên, tức là tính dựa vào return $G_t$.  Trước tiên ta viết lại $G_t$ theo công thức đệ quy:
+
+$$
+\begin{align}
+G_{t:h} = R_{t+1} + \gamma G_{t+1:h}, \qquad t < h < T,
+\end{align}
+$$
+
+Tiếp đến ta có công thức biến đổi để giảm variance như sau:
+$$
+G_{t:h} \doteq \rho_t \left( R_{t+1} + \gamma G_{t+1:h} \right) + (1 - \rho_t) V_{h-1}(S_t), \qquad t < h < T,
+$$
+Ở đây có thêm term $(1 - \rho_t) V_{h-1}(S_t)$. Hãy nghĩ đến trường hợp $\rho_t = 0$ (tức là $\pi(A_t \mid S_t) = 0$ trong khi $b(A_t \mid S_t) \neq 0$)  thì công thức ban đầu sẽ trả về $0$. Bằng cách thêm term kia vào, chúng ta vẫn có thể trả về được kết quả ước tính trước đó bằng $V$. Điều này còn thêm một khả năng nữa là khi $\rho = 0$, ta vẫn có thể tiếp tục trả về kết quả mà ko cần ngắt thuật toán ngay (mình ko chắc nhưng có suy ra được cái này).
+
+Quay trở lại với mục đích ban đầu của chúng ta là giảm variance cho việc tính $V$, nhắc lại công thức là:
+$$
+V_{t+n}(S_t) \doteq V_{t+n-1}(S_t) + \alpha \left[ G_{t:t+n} - V_{t+n-1}(S_t) \right], \qquad 0 \leq t < T,
+$$
+Rồi giờ cắm cái $G_{t:t+n}$ bên trên vào công thức là được, ok rồi đó.
+
+
+Tiếp đến là công thức giảm variance cho việc tính $Q$. Do action đầu tiên trong $Q(S_t, A_t)$ được cố định, ta cần một công thức hơi khác một xíu:
+$$
+\begin{align*}
+G_{t:h} &\doteq R_{t+1} + \gamma \left( \rho_{t+1} G_{t+1:h} + \bar{V}_{h-1}(S_{t+1}) - \rho_{t+1} Q_{h-1}(S_{t+1}, A_{t+1}) \right), \\
+&= R_{t+1} + \gamma \rho_{t+1} \left( G_{t+1:h} - Q_{h-1}(S_{t+1}, A_{t+1}) \right) + \gamma \bar{V}_{h-1}(S_{t+1}), \qquad t < h \leq T.
+\end{align*}
+$$
+
+Chứng minh công thức này bằng cách chứng mình rằng:
+$$
+\begin{align}
+\mathbb{E}\left[\gamma \left( \ \bar{V}_{h-1}(S_{t+1}) - \rho_{t+1} Q_{h-1}(S_{t+1}, A_{t+1}) \right)\right] = 0
+\end{align}
+$$
+Cái này ko khó lắm nhưng mà do kí hiệu $\mathbb{E}$ được trình bày hơi vắn tắt, để ý tí là được.
+
+---
+
+## Off-policy Learning Without Importance Sampling
+
+Có thể dùng off-policy mà không cần importance sampling không? Q-learning và Expected-Sarsa cho chúng ta câu trả lời là có, nhưng ở trường hợp 1 step. Vậy nếu n-step thì có làm được không? 
+
+Có chứ, mà cách này hơi tốn tài nguyên.
+![[Pasted image 20250712011040.png]]
+Biểu đồ trên là một ví dụ để cách tính này dễ hình dung hơn. Ta vẫn sẽ tính $Q$ ở mỗi level, tuy nhiên những action không được chọn mới được đóng góp vào tổng cuối cùng, action được chọn thì đem hệ số $\pi(A_t \mid S_t)$ nhân xuống lần gọi đệ quy tiếp theo. Ở level cuối, mọi action đều được đóng góp vào tổng (kể cả action được chọn). Công thức bên dưới đây ví dụ cho trường hợp có 2 level (lưu ý hình trên là 3 level):
+
+$$
+\begin{align*}
+G_{t:t+2} &\doteq R_{t+1} + \gamma \sum_{a \neq A_{t+1}} \pi(a \mid S_{t+1}) Q_{t+1}(S_{t+1}, a) \\
+&\quad + \gamma \pi(A_{t+1} \mid S_{t+1}) \left( R_{t+2} + \gamma \sum_{a} \pi(a \mid S_{t+2}) Q_{t+1}(S_{t+2}, a) \right) \\
+&= R_{t+1} + \gamma \sum_{a \neq A_{t+1}} \pi(a \mid S_{t+1}) Q_{t+1}(S_{t+1}, a) 
++ \gamma \pi(A_{t+1} \mid S_{t+1}) G_{t+1:t+2},
+\end{align*}
+$$
+
+==Một vài điều lưu ý==:
+- Phương pháp này vẫn là off policy, tức là $A_i$ được lấy từ behavior policy $b$, tuy nhiên phần xác suất thì lấy từ $\pi$ thế nên mới không cần importance sampling.
+- Lý do cho việc current action node của mỗi level (trừ level cuối) không được tính vào tổng là để tránh việc cộng trùng lặp.
+
+---
+
+## A Unifying Algorithm: n-step Q($\sigma$)
+
+![[Pasted image 20250712012259.png]]
+Chúng ta có thể tổng quát hóa Q learning bằng $\sigma$, tức là liệu có hay không ta muốn sample các action khác. Với ý tưởng này, $\sigma \in \{  0, 1 \}$   , tuy nhiên ta cũng có thể tổng quát thêm nữa bằng cách đưa ra công thức với $\sigma$ có thể nằm trong khoảng $[0, 1]$.
+
+Đầu tiên là
+$$
+\begin{align*}
+G_{t:h} &= R_{t+1} + \gamma \sum_{a \ne A_{t+1}} \pi(a \mid S_{t+1}) Q_{h-1}(S_{t+1}, a) 
++ \gamma \pi(A_{t+1} \mid S_{t+1}) G_{t+1:h} \\
+&= R_{t+1} + \gamma \bar{V}_{h-1}(S_{t+1}) 
+- \gamma \pi(A_{t+1} \mid S_{t+1}) Q_{h-1}(S_{t+1}, A_{t+1}) 
++ \gamma \pi(A_{t+1} \mid S_{t+1}) G_{t+1:h} \\
+&= R_{t+1} + \gamma \pi(A_{t+1} \mid S_{t+1}) \left( G_{t+1:h} - Q_{h-1}(S_{t+1}, A_{t+1}) \right) 
++ \gamma \bar{V}_{h-1}(S_{t+1}),
+\end{align*}
+$$
+
+Thêm phần switch bằng $\sigma$ vào là ta có công thức:
+
+$$
+\begin{equation}
+G_{t:h} \doteq R_{t+1} + \gamma \left( \sigma_{t+1} \rho_{t+1} + (1 - \sigma_{t+1}) \pi(A_{t+1} \mid S_{t+1}) \right)
+\left( G_{t+1:h} - Q_{h-1}(S_{t+1}, A_{t+1}) \right)
++ \gamma \bar{V}_{h-1}(S_{t+1}),
+\tag{7.17}
+\end{equation}
+$$
+ 
+---
+
+## Planning and learning: Dyna Q
+
+Cho tới giờ các phương pháp cho tới giờ mà chúng ta tìm hiểu có thể phân ra làm hai loại, một là yêu cầu dynamics của environment như dynamic programming , hai là không cần dùng đến dynamics như Monte Carlo hoặc TD.
+
+- Model: bất kể thứ gì mà mô hình dùng để dự đoán cách mà môi trường phản ứng.
+- Planning: dùng mô phỏng nội bộ
+- Learning: tương tác thực tế với môi trường
+![[Pasted image 20250712031837.png]]
+
+![[Pasted image 20250712032425.png]]
+
+Ngạc nhiên là với planning, agent học nhanh hơn nhiều. Mình từng nghĩ điều này là không thể vì khi ước tính model, một nguồn sai số nữa đã được thêm vào và cho dù tận dụng được nhiều dữ liệu (giả lập dữ liệu môi trường bằng model) tới đâu thì kết quả ra vẫn là sai. Tuy nhiên các thực nghiệm nghiệm trong thực tế (ít nhất là trong sách) cho ra một kết quả rất tích cực.
+
+---
+
+## Prioritized sweeping
+
+Có thể bạn đã nhận ra, thứ tự cập nhật state cũng quan trọng trong việc tối ưu thời gian học. Ví dụ ở episode đầu, chỉ có state kế cuối là có value function được update khác đi so với giá trị ban đầu, do đó (ông nào học cp mà không biết cái này thì vừa tội) thì update ngược là một ý tưởng hay. Tuy nhiên, tác giả không muốn ý tưởng sweeping trên bị gán cố định với một state cụ thể nào cả, vậy nên bất kì state nào bị thay đổi so quá một giá trị $\theta$ nào đó, ta sẽ đưa nó vào hàng đợi.
+$$
+\begin{align*}
+&\text{Initialize } Q(s, a), \text{Model}(s, a) \text{ for all } s, a, \text{ and } PQueue \text{ to empty} \\
+&\textbf{Loop forever:} \\
+&\quad (a) \quad S \leftarrow \text{current (nonterminal) state} \\
+&\quad (b) \quad A \leftarrow \text{policy}(S, Q) \\
+&\quad (c) \quad \text{Take action } A; \text{ observe reward } R \text{ and state } S' \\
+&\quad (d) \quad \text{Model}(S, A) \leftarrow R, S' \\
+&\quad (e) \quad P \leftarrow \left| R + \gamma \max_a Q(S', a) - Q(S, A) \right| \\
+&\quad (f) \quad \text{if } P > \theta, \text{ insert } (S, A) \text{ into } PQueue \text{ with priority } P \\
+&\quad (g) \quad \text{Loop repeat } n \text{ times, while } PQueue \text{ not empty:} \\
+&\qquad S, A \leftarrow \text{first}(PQueue) \\
+&\qquad R, S' \leftarrow \text{Model}(S, A) \\
+&\qquad Q(S, A) \leftarrow Q(S, A) + \alpha \left[ R + \gamma \max_a Q(S', a) - Q(S, A) \right] \\
+&\qquad \text{Loop for all } \bar{S}, \bar{A} \text{ predicted to lead to } S: \\
+&\qquad\quad \bar{R} \leftarrow \text{predicted reward for } \bar{S}, \bar{A}, S \\
+&\qquad\quad P \leftarrow \left| \bar{R} + \gamma \max_a Q(S, a) - Q(\bar{S}, \bar{A}) \right| \\
+&\qquad\quad \text{if } P > \theta \text{ then insert } (\bar{S}, \bar{A}) \text{ into } PQueue \text{ with priority } P
+\end{align*}
+$$
+
+==Note==:
+- Update $Q$ và $V$ dựa trên policy ($\pi$ hay $b$) đều được gọi là trajectory sampling và nó update dựa trên trajectory hiện tại.
+
+--- 
+
+## Miscellaneous
+
+- Real-time DP khác DP chỗ DP quét qua toàn bộ trạng thái để update trong khi real-time DP chỉ update dựa trên trajectory hiện tại (có dùng model dynamics)
+- Planning có hai kiểu, một là background, hai là decision time. Decision time dùng khi chỉ có value function là tính được, sau đó action sẽ được chọn dựa vào việc so sánh giữa chúng dựa trên model dynamics.

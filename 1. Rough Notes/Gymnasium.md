@@ -1,0 +1,2 @@
+- Truncation và Termination khác nhau khi bootstrapping
+- 
