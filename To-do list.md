@@ -1,3 +1,3 @@
-- KL divergence
-- Các luật xác suất (Multivariate)
-- Chuỗi Taylor
+- pattern recognition
+- Numerical Optimization
+- linear algebra

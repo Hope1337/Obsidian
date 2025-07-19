@@ -8,45 +8,27 @@
         "type": "tabs",
         "children": [
           {
-            "id": "c04341ca76aadec6",
+            "id": "07488e1d7ab75c04",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "4. Tags/Reinforcement Learning.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Reinforcement Learning"
+              "title": "New tab"
             }
           },
           {
-            "id": "03f12c7863861004",
+            "id": "253105dae6607f65",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "To-do list.md",
+                "file": "ROS fundamental.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "To-do list"
-            }
-          },
-          {
-            "id": "fd61b1b37278a459",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "1. Rough Notes/Một số công cụ dùng cho việc nghiên cứu.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Một số công cụ dùng cho việc nghiên cứu"
+              "title": "ROS fundamental"
             }
           }
         ],
@@ -107,7 +89,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 332.5
+    "width": 332.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3a6c179aa3a2c6d",
@@ -211,15 +194,26 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "03f12c7863861004",
+  "active": "253105dae6607f65",
   "lastOpenFiles": [
-    "1. Rough Notes/Xấp xỉ Taylor.md",
     "To-do list.md",
+    "Drawing 2025-07-19 10.49.31.excalidraw.md",
+    "ROS fundamental.md",
+    "Reinforcement Papers.md",
+    "Pasted image 20250719105711.png",
+    "2025-07-08.md",
+    "Excalidraw/Drawing 2025-07-17 18.48.06.excalidraw.md",
+    "Excalidraw/Drawing 2025-07-01 23.25.58.excalidraw.md",
+    "Excalidraw/Drawing 2025-07-17 20.23.11.excalidraw.md",
+    "Excalidraw/Drawing 2025-07-08 13.37.13.excalidraw.md",
+    "4. Tags/ROS.md",
+    "1. Rough Notes/Quick Note on Deep RL Bootcamp 2017.md",
+    "1. Rough Notes/KL-Divergence.md",
+    "1. Rough Notes/Xấp xỉ Taylor.md",
     "Pasted image 20250716015431.png",
     "Gymnasium.md",
     "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
     "4. Tags/Reinforcement Learning.md",
-    "Reinforcement Papers.md",
     "1. Rough Notes/Manager Based Environment and Config.md",
     "1. Rough Notes/Một số công cụ dùng cho việc nghiên cứu.md",
     "6. Main Notes/Danh mục xếp hạng tạp chí khoa học.md",
@@ -229,18 +223,7 @@
     "4. Tags/LibTorch.md",
     "4. Tags/LaTeX.md",
     "4. Tags/Isaaclab.md",
-    "1. Rough Notes/Gymnasium.md",
-    "6. Main Notes/Python Logging.md",
     "3. Source Materials/Visuals/Pasted image 20250715223932.png",
-    "Training Agent.md",
-    "4. Tags/Gymnasium.md",
-    "6. Main Notes/Approximate Solution Methods.md",
-    "Tabular Solution Methods.md",
-    "6. Main Notes/Human-level control through deep reinforcement learning.md",
-    "6. Main Notes/Policy Gradient Method.md",
-    "6. Main Notes/Isaaclab Fundamental.md",
-    "6. Main Notes/Một số thuật ngữ cho researcher.md",
-    "4. Tags/Should now knowledge for researchers.md",
     "3. Source Materials/Visuals/Pasted image 20250713230943.png",
     "3. Source Materials/Visuals/Pasted image 20250713230918.png",
     "3. Source Materials/Visuals/Pasted image 20250713213252.png",
@@ -248,7 +231,6 @@
     "3. Source Materials/Visuals/Pasted image 20250713203118.png",
     "3. Source Materials/Visuals/Pasted image 20250713201825.png",
     "3. Source Materials/Visuals/Pasted image 20250713163130.png",
-    "3. Source Materials/Visuals/Pasted image 20250713163003.png",
     "2. Achieve",
     "Untitled.canvas",
     "Untitled 1.canvas",

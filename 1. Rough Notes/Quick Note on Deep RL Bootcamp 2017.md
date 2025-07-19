@@ -1,0 +1,2 @@
+- use huber loss instead of L2, cuz it softer punish outliers than L2.
+- 
