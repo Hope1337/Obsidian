@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Test push.md",
+                "file": "1. Rough Notes/Custom GRUB Theme.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Test push"
+              "title": "Custom GRUB Theme"
             }
           },
           {
@@ -198,37 +198,37 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "07488e1d7ab75c04",
+  "active": "13c273843a3fd907",
   "lastOpenFiles": [
+    "6. Main Notes/Ventoy.md",
+    "1. Rough Notes/Custom GRUB Theme.md",
+    "1. Rough Notes/KL-Divergence.md",
+    "1. Rough Notes/Gymnasium.md",
+    "1. Rough Notes/Manager Based Environment and Config.md",
+    "1. Rough Notes/Xấp xỉ Taylor.md",
+    "1. Rough Notes/Xây dựng profile cho bản thân.md",
+    "1. Rough Notes/Gymnasium 1.md",
+    "1. Rough Notes/Reinforcement Papers.md",
+    "1. Rough Notes/ROS fundamental.md",
     "To-do list.md",
     "Test push.md",
     "2025-07-08.md",
     "Pasted image 20250719105711.png",
     "Drawing 2025-07-19 10.49.31.excalidraw.md",
-    "Gymnasium.md",
     "Untitled.base",
-    "ROS fundamental.md",
-    "Reinforcement Papers.md",
     "Excalidraw/Drawing 2025-07-17 18.48.06.excalidraw.md",
     "Excalidraw/Drawing 2025-07-01 23.25.58.excalidraw.md",
     "Excalidraw/Drawing 2025-07-17 20.23.11.excalidraw.md",
     "Excalidraw/Drawing 2025-07-08 13.37.13.excalidraw.md",
     "4. Tags/ROS.md",
     "1. Rough Notes/Quick Note on Deep RL Bootcamp 2017.md",
-    "1. Rough Notes/KL-Divergence.md",
-    "1. Rough Notes/Xấp xỉ Taylor.md",
     "Pasted image 20250716015431.png",
     "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
     "4. Tags/Reinforcement Learning.md",
-    "1. Rough Notes/Manager Based Environment and Config.md",
     "1. Rough Notes/Một số công cụ dùng cho việc nghiên cứu.md",
     "6. Main Notes/Danh mục xếp hạng tạp chí khoa học.md",
     "4. Tags/Reading.md",
     "4. Tags/Markdown.md",
-    "4. Tags/Listening.md",
-    "4. Tags/LibTorch.md",
-    "4. Tags/LaTeX.md",
-    "4. Tags/Isaaclab.md",
     "3. Source Materials/Visuals/Pasted image 20250715223932.png",
     "3. Source Materials/Visuals/Pasted image 20250713230943.png",
     "3. Source Materials/Visuals/Pasted image 20250713230918.png",

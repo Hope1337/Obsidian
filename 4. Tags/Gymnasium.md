@@ -1,2 +1,2 @@
-[[Gymnasium]]
+[[Gymnasium 1]]
 [[Training Agent]]
