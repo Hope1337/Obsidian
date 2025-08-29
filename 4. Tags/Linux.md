@@ -3,4 +3,8 @@
 [[Linux File Permission]]
 [[What is Distro of Linux]]
 [[Linux user management]]
-
+[[Linux Package Management]]
+[[Symbolic Link]]
+[[Foreground and background]]
+[[journalctl]]
+[[Systemctl Linux]]

@@ -10,6 +10,7 @@ Trước tiên thì [shopping trước đã](https://www.gnome-look.org/browse?c
 sudo mkdir -p /boot/grub/themes
 sudo cp -r Elegant-wave-blur-left-light /boot/grub/themes/
 ```
+Note: copy cái folder direct parent của `theme.txt` á.
 
 ###### 3. Chỉnh config
 ```shell
