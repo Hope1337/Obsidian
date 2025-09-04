@@ -15,6 +15,8 @@ Chuyện lúc build: project của mình có ba loại file: `.py`, '.cu' và '.
 	- `.lib` các static lib
 	- Các tools phụ trợ
 
+Tóm lại, MSVC là bộ công cụ build, Window SDK cung cấp API cho dev.
+
 Theo nguồn tin (chuẩn, đôi khi ko chuẩn) từ ChatGPT và Grok, `python` được build dựa trên `MSVC` (trên window), hơn nữa, `setuptools` và `nvcc` cũng cần `MSVC`. Kèm theo đó `Window SDK` (chứa các header cần thiết) để thực hiện quá trình build. Thế cho nên `g++` thôi là chưa đủ (khỏi cần `g++`, chỉ cần `MSVC` và `Window SDK` thôi là đủ).
 
 > Tải ở đâu?

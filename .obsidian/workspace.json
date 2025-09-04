@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Linux tips and tricks.md",
+                "file": "CMake.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linux tips and tricks"
+              "title": "CMake"
             }
           },
           {
@@ -106,7 +106,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tip",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -237,17 +237,24 @@
   },
   "active": "a31d93bfbea8432f",
   "lastOpenFiles": [
+    "Untitled.md",
+    "CMake.md",
+    "Untitled 1.base",
+    "Untitled 2.base",
+    "Untitled.base",
+    "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
+    "How is C++ compiled.md",
+    "C11557_01_01.jpg",
+    "GitHub vs GitLab.md",
+    "6. Main Notes/CI CD GitHub Actions.md",
+    "6. Main Notes/journalctl.md",
+    "6. Main Notes/Linux tips and tricks.md",
     "6. Main Notes/Foreground and background.md",
-    "Linux tips and tricks.md",
     "6. Main Notes/Systemctl Linux.md",
     "4. Tags/Linux.md",
-    "journalctl.md",
     "6. Main Notes/Linux Package Management.md",
     "6. Main Notes/Symbolic Link.md",
     "4. Tags/Linux 1.md",
-    "Untitled.md",
-    "Untitled 1.base",
-    "Untitled.base",
     "6. Main Notes/tmux.md",
     "6. Main Notes/Hostname Linux.md",
     "7. Templates/Untitled.md",
@@ -263,18 +270,12 @@
     "1. Rough Notes/Gymnasium.md",
     "1. Rough Notes/Manager Based Environment and Config.md",
     "1. Rough Notes/Xấp xỉ Taylor.md",
-    "1. Rough Notes/Xây dựng profile cho bản thân.md",
-    "1. Rough Notes/Gymnasium 1.md",
-    "1. Rough Notes/Reinforcement Papers.md",
-    "1. Rough Notes/ROS fundamental.md",
-    "To-do list.md",
     "Pasted image 20250719105711.png",
     "Pasted image 20250716015431.png",
     "3. Source Materials/Visuals/Pasted image 20250715223932.png",
     "3. Source Materials/Visuals/Pasted image 20250713230943.png",
     "3. Source Materials/Visuals/Pasted image 20250713230918.png",
     "3. Source Materials/Visuals/Pasted image 20250713213252.png",
-    "3. Source Materials/Visuals/Pasted image 20250713204321.png",
     "2. Achieve",
     "Untitled.canvas",
     "Untitled 1.canvas",
@@ -284,7 +285,6 @@
     "3. Source Materials/Visuals/6499636408822.mp4",
     "3. Source Materials/Visuals/065b3de5-66e9-404c-83ff-9c4f20d62411.mp4",
     "Excalidraw",
-    "2. Source Material",
-    "textgenerator/templates/default"
+    "2. Source Material"
   ]
 }
