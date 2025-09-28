@@ -1,3 +1,0 @@
-- pattern recognition
-- Numerical Optimization
-- linear algebra
