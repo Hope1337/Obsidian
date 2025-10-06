@@ -4,53 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "a8a7797b666d7cdd",
+        "id": "e407c3c9f160c71b",
         "type": "tabs",
         "children": [
           {
-            "id": "d11459b900b6fd15",
+            "id": "8844a8763a0a1bd7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4. Tags/Linux.md",
+                "file": "Python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Linux"
+              "title": "Python"
             }
           },
           {
-            "id": "a31d93bfbea8432f",
+            "id": "3125c950922edc85",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4. Tags/Reinforcement Learning.md",
+                "file": "Research Labs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Reinforcement Learning"
+              "title": "Research Labs"
             }
           },
           {
-            "id": "e94da83b66e4a695",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "15bbb0560b52f3cf",
+            "id": "300d94315d38578a",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -58,9 +44,21 @@
               "icon": "lucide-file",
               "title": "New tab"
             }
+          },
+          {
+            "id": "c525fd6f89194585",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.14"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.9.14"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -221,49 +219,49 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e94da83b66e4a695",
+  "active": "3125c950922edc85",
   "lastOpenFiles": [
-    "6. Main Notes/GitHub vs GitLab.md",
-    "Untitled.md",
-    "6. Main Notes/Wandb.md",
+    "Research Labs.md",
+    "6. Main Notes/Setup môi trường CUDA.md",
+    "Vision-Language-Action Models.md",
+    "7. Templates/MLFlow.md",
+    "itertools.md",
+    "7. Templates/Python Fundamental.md",
+    "Untitled.canvas",
+    "Untitled.base",
+    "2025-10-05.md",
+    "6. Main Notes/VIM.md",
+    "7. Templates/Python.md",
+    "6. Main Notes/Build extension.md",
     "6. Main Notes/CMake.md",
+    "4. Tags/Reinforcement Learning.md",
+    "4. Tags/Linux.md",
+    "6. Main Notes/Windows Subsystem for Linux (WSL).md",
+    "6. Main Notes/GitHub vs GitLab.md",
+    "6. Main Notes/Wandb.md",
     "To-do list.md",
     "6. Main Notes/How is C++ compiled.md",
     "6. Main Notes/Revise Reinforcement Learning by Barto and Sutton.md",
-    "4. Tags/Reinforcement Learning.md",
     "6. Main Notes/Policy Gradient Method.md",
     "6. Main Notes/Approximate Solution Methods.md",
-    "4. Tags/Linux.md",
     "3. Source Materials/Visuals/LaTeX_list_parameters-plain.svg",
     "Untitled 1.base",
     "Untitled 2.base",
-    "Untitled.base",
     "6. Main Notes/Setup compiler CUDA trên Window và Ubuntu.md",
     "C11557_01_01.jpg",
     "6. Main Notes/CI CD GitHub Actions.md",
     "6. Main Notes/journalctl.md",
     "6. Main Notes/Linux tips and tricks.md",
     "6. Main Notes/Foreground and background.md",
-    "6. Main Notes/Systemctl Linux.md",
-    "6. Main Notes/Linux Package Management.md",
-    "6. Main Notes/Symbolic Link.md",
-    "4. Tags/Linux 1.md",
-    "6. Main Notes/tmux.md",
-    "6. Main Notes/Hostname Linux.md",
-    "7. Templates/Untitled.md",
-    "6. Main Notes/SSH tips and tricks.md",
-    "6. Main Notes/Windows Subsystem for Linux (WSL).md",
     "3. Source Materials/Visuals/Pasted image 20250824012859.png",
     "3. Source Materials/Visuals/Pasted image 20250824012829.png",
     "3. Source Materials/Visuals/Pasted image 20250824011126.png",
-    "4. Tags/SSH.md",
     "Pasted image 20250719105711.png",
     "Pasted image 20250716015431.png",
     "3. Source Materials/Visuals/Pasted image 20250715223932.png",
     "3. Source Materials/Visuals/Pasted image 20250713230943.png",
     "3. Source Materials/Visuals/Pasted image 20250713230918.png",
     "2. Achieve",
-    "Untitled.canvas",
     "Untitled 1.canvas",
     "Untitled 2.canvas",
     "3. Source Materials/Cheatsheet/Vim.pdf",
