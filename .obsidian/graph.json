@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "CUDA",
+  "search": "cuda",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": false,
@@ -17,6 +17,6 @@
   "repelStrength": 20,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1.0000000000000062,
+  "scale": 0.7674367617720408,
   "close": false
 }

@@ -1,0 +1,2 @@
+- Use correlated noised while training as it push the agent consistently face with the similar noise rather than random noise.
+- 

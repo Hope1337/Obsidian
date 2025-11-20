@@ -1,0 +1,3 @@
+- [Bounded Rationality](https://bjlkeng.io/index-1.html) 
+- [Peter E. Holderrieth](https://www.peterholderrieth.com/)
+- 
