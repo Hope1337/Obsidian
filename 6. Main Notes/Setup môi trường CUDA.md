@@ -109,3 +109,48 @@ Build cuda_13.0.r13.0/compiler.36424714_0
 
 Vào [trang chủ chính thức](https://developer.nvidia.com/cudnn) để tải về.
 `cuDNN` mặc định sẽ được cài vào `/usr/lib/x86_64-linux-gnu/` hoặc `/usr/local/cuda/lib64/`, đây là nơi mặc định linker luôn tìm nên khỏi cần add path cho `cuDNN`.
+
+
+----
+## Một vài thứ linh tinh
+
+## MOK management 
+Vì một vài lí do mà theo gemni là do scure boot và tick chọn option install third party package thì sau khi tải nvidia driver, ubuntu bắt phải thông qua một bước nữa mới cho sử dụng đó là đặt pass MOK. Cứ đặt lại mật khẩu rồi thao tác theo trình tự sau:
+
+1. Chọn **Enroll MOK** (đừng chọn _Continue boot_ ngay lúc này).
+2. Chọn **View key 0** (để kiểm tra, nhưng có thể bỏ qua bước này).
+3. Chọn **Continue**.
+4. Hệ thống hỏi "Enroll the key(s)?", chọn **Yes**.
+5. Nhập **mật khẩu** bạn đã tạo ở bước trên (lưu ý: bàn phím có thể không hiện ký tự `*` khi gõ, cứ gõ đúng rồi Enter).
+6. Cuối cùng chọn **Reboot**.
+
+Nếu bạn lỡ bỏ qua bước này lúc restart máy thì:
+```shell
+sudo update-secureboot-policy --enroll-key
+```
+
+## Tải google =))))))
+
+```shell 
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt --fix-broken install
+```
+
+
+## Tải vim và git 
+```shell
+sudo apt install vim 
+sudo apt install git
+```
+
+## Tải bộ gõ tiếng Việt
+
+```shell 
+sudo add-apt-repository ppa:bamboo-engine/ibus-bamboo
+sudo apt-get update
+sudo apt-get install ibus ibus-bamboo --install-recommends
+ibus restart
+# Đặt ibus-bamboo làm bộ gõ mặc định
+env DCONF_PROFILE=ibus dconf write /desktop/ibus/general/preload-engines "['BambooUs', 'Bamboo']" && gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
+```

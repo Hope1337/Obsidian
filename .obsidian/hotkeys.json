@@ -15,5 +15,14 @@
       "key": "W"
     }
   ],
-  "workspace:close": []
+  "workspace:close": [],
+  "obsidian-git:pull": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "E"
+    }
+  ],
+  "markdown:toggle-preview": []
 }
