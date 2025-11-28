@@ -41,6 +41,7 @@ sudo apt install ubuntu-drivers-common
 sudo ubuntu-drivers devices
 ```
 Một list các recommended drivers sẽ hiện ra cho bạn lựa chọn:
+```
 ```shell
 $ sudo ubuntu-drivers devices
 == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 ==
@@ -54,6 +55,8 @@ driver   : nvidia-driver-550 - distro non-free recommended
 driver   : xserver-xorg-video-nouveau - distro free builtin
 ```
 Nên chọn cái có dòng `recommended` trước, nếu lỗi thì đổi cái khác:D
+
+==Quan trọng==: Ưu tiên bản driver open trước nhé, đm giờ recommend cài xong vẫn no devices were found, resolve cả buổi.
 
 2. Install driver
 ```shell
@@ -143,6 +146,7 @@ sudo apt --fix-broken install
 sudo apt install vim 
 sudo apt install git
 ```
+
 
 ## Tải bộ gõ tiếng Việt
 
