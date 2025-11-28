@@ -11,13 +11,32 @@
             "id": "d1aa9a1cf8030cf0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "4. Tags/Ubuntu.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Ubuntu"
+            }
+          },
+          {
+            "id": "bcb7fb15ab7599fa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "6. Main Notes/Dual boot Ubuntu with Window.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Dual boot Ubuntu with Window"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -49,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "systemd",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -70,8 +89,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -179,8 +197,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d1aa9a1cf8030cf0",
+  "active": "bcb7fb15ab7599fa",
   "lastOpenFiles": [
+    "3. Source Materials/Visuals/Pasted image 20251128093815.png",
+    "6. Main Notes/Dual boot Ubuntu with Window.md",
+    "4. Tags/Ubuntu.md",
+    "4. Tags/Linux.md",
+    "OpenUSD Fundamentals.md",
+    "Untitled.md",
+    "Things I have learnt.md",
+    "6. Main Notes/Untitled 1.base",
+    "6. Main Notes/Untitled.base",
     "6. Main Notes/Systemctl Linux.md",
     "4. Tags/Isaacsim.md",
     "6. Main Notes/Setup ROS2 for Isaacsim.md",
@@ -189,10 +216,7 @@
     "1. Rough Notes/ROS fundamental.md",
     "4. Tags/OpenUSD.md",
     "Keep my self update-to-date.md",
-    "Things I have learnt.md",
-    "Untitled.md",
     "Research Labs.md",
-    "OpenUSD Fundamentals.md",
     "Amazing blog.md",
     "3. Source Materials/Visuals/Isaacsim fundamental.md",
     "6. Main Notes/Ingesting Robot Assets and Simulating Your Robot in Isaac Sim.md",
@@ -207,16 +231,12 @@
     "LaTeX Installation.md",
     "Draft.md",
     "Calculus.md",
-    "Essence of Calculus.md",
-    "Proof.md",
-    "Vision-Language-Action Models.md",
     "Pasted image 20251110152745.png",
     "Pasted image 20251110150655.png",
     "Pasted image 20251110190345.png",
     "Pasted image 20251110191432.png",
     "Pasted image 20251110130847.png",
     "Pasted image 20251110130810.png",
-    "6. Main Notes/Setup môi trường CUDA.md",
     "Untitled.canvas",
     "Untitled.base",
     "Untitled 1.base",
@@ -227,8 +247,6 @@
     "3. Source Materials/Cheatsheet/Vim.pdf",
     "3. Source Materials/Cheatsheet/Markdown.pdf",
     "3. Source Materials/Visuals/6499636408822.mp4",
-    "3. Source Materials/Visuals/065b3de5-66e9-404c-83ff-9c4f20d62411.mp4",
-    "Excalidraw",
-    "2. Source Material"
+    "3. Source Materials/Visuals/065b3de5-66e9-404c-83ff-9c4f20d62411.mp4"
   ]
 }
