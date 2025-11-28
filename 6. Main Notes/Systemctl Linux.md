@@ -131,5 +131,3 @@ sudo systemctl enable --now ssh
     
 
 ---
-
-👉 Bạn có muốn mình soạn thêm **bảng timeline** minh họa: trước reboot / sau reboot, khi chỉ `start`, chỉ `enable`, và cả hai, để bạn thấy sự khác biệt trực quan không?
