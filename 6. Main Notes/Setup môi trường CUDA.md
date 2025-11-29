@@ -3,7 +3,7 @@ Có ba thứ cần lưu ý:
 - `CUDA toolkit`: dùng để lập trình với GPU
 - `cuDNN`: dùng để lập trình với GPU, đặc biệt là mạng học sâu. Thường thì pytorch sẽ cài sẵn cái này nhưng đôi lúc không có.
 
-## 1. Cài đặt Miniconda
+## 1. Installing Miniconda
 
 1. Download miniconda installer
 ```bash
@@ -29,7 +29,7 @@ conda config --set auto_activate_base false
 
 ---
 
-## 2. Install CUDA driver
+## 2. Installing CUDA driver
 
 Nếu bạn gõ `nvidia-smi` mà báo lỗi thì là chưa có driver đó.
 
@@ -73,7 +73,7 @@ Optional: cài đặt tự động
 sudo apt-get install -y nvidia-open #open kernel
 sudo apt-get install -y cuda-drivers #proprietary kernel
 ```
-## 3. Install CUDA Toolkit
+## 3. Installing CUDA Toolkit
 
 Nếu bạn gõ `nvcc --version` mà báo lỗi thì đang chưa có `CUDA Toolkit đó`. Vào [trang chủ chính thức](https://developer.nvidia.com/cuda-toolkit) mà cài đặt.
 
@@ -107,10 +107,18 @@ Build cuda_13.0.r13.0/compiler.36424714_0
 ```
 
 
-## 4. Install cuDNN
+## 4. Installing cuDNN
 
 Vào [trang chủ chính thức](https://developer.nvidia.com/cudnn) để tải về.
 `cuDNN` mặc định sẽ được cài vào `/usr/lib/x86_64-linux-gnu/` hoặc `/usr/local/cuda/lib64/`, đây là nơi mặc định linker luôn tìm nên khỏi cần add path cho `cuDNN`.
+
+
+
+## 5. Installing Nvidia Container Toolkit 
+
+Follow theo guide ở đây: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
+Nhớ làm theo bước config docker nữa là xong 
 
 
 ----
