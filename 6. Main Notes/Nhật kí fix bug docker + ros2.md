@@ -9,3 +9,17 @@ Có thể add `sudo` vào trước lệnh cũng được, tuy nhiên vậy hơi 
 sudo usermod -aG docker $USER
 newgrp docker #kích hoạt ngay trong terminal hiện tại 
 ```
+
+Muốn active docker group thì phải reboot lại phát.
+
+---
+### ROS2 docker không giao tiếp được với ROS2 native
+
+Này là do cơ chế shared mem mà docker dùng để tối ưu, buộc dùng UDPv4 là được:
+```shell
+# Sửa UPD -> UDP
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+```
+
+==Important==: nhớ thêm cờ `--net=host`.
+
