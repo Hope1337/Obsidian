@@ -1,0 +1,2 @@
+- Isaac ROS build trên ROS2,  tuy nhiên các node được accelerated bằng các phương thức:
+	- NITROS
