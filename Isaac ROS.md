@@ -13,6 +13,8 @@ Isaac ROS được tổ chức thành các packages được gọi là GEMs. M�
 
 - **Isaac ROS Image Pipeline:** Cung cấp các công cụ xử lý ảnh cơ bản nhưng quan trọng như _Rectification_ (khử méo ống kính), _Resize_, _Format Conversion_, tất cả đều chạy trên GPU hoặc phần cứng VIC (Video Image Compositor) chuyên dụng trên Jetson.
 
+---
+
 
 
 > Tại sao Isaac ROS không cung cấp một docker image luôn đi? Bắt clone repo về nữa làm gì
@@ -38,4 +40,6 @@ docker run -it --rm \
 
 Hơn nữa còn một số vấn đề khác như tương thích phần cứng như trên x86 và jetpack, do đó isaac ros repo cung cấp hết cái này cho mình, chỉ cần gọi lên mà dùng thôi.
 
+
+---
 
