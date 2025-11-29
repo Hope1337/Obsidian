@@ -13,20 +13,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4. Tags/Ubuntu.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Ubuntu"
-            }
-          },
-          {
-            "id": "23cc294f13d625b4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "Isaac ROS.md",
                 "mode": "source",
                 "source": false
@@ -35,8 +21,7 @@
               "title": "Isaac ROS"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -197,22 +182,23 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "23cc294f13d625b4",
+  "active": "d1aa9a1cf8030cf0",
   "lastOpenFiles": [
-    "Research Labs.md",
-    "Isaac ROS.md",
-    "Things I have learnt.md",
+    "4. Tags/Ubuntu.md",
+    "6. Main Notes/Nhật kí fix bug docker + ros2.md",
     "OpenUSD Fundamentals.md",
     "Một ngày fix bug.md",
-    "6. Main Notes/Nhật kí fix bug docker + ros2.md",
+    "Research Labs.md",
+    "Things I have learnt.md",
     "Mấy lệnh hay quên.md",
+    "Keep my self update-to-date.md",
+    "Isaac ROS.md",
     "4. Tags/Nhật kí fix bug.md",
     "Untitled 1.md",
     "4. Tags/Docker.md",
     "6. Main Notes/Fixbug với Docker.md",
     "2. Achieve/Docker CLI.md",
     "6. Main Notes/Docker Fundamental.md",
-    "4. Tags/Ubuntu.md",
     "4. Tags/NVIDIA Isaac.md",
     "4. Tags/Isaaclab.md",
     "6. Main Notes/Setup môi trường CUDA.md",
@@ -227,7 +213,6 @@
     "4. Tags/ROS.md",
     "6. Main Notes/Windows Subsystem for Linux (WSL).md",
     "1. Rough Notes/ROS fundamental.md",
-    "4. Tags/OpenUSD.md",
     "3. Source Materials/Visuals/Pasted image 20251125010807.png",
     "3. Source Materials/Visuals/Pasted image 20251125010801.png",
     "3. Source Materials/Visuals/Pasted image 20251123090603.png",
