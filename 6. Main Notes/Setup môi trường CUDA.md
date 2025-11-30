@@ -18,6 +18,8 @@ bash ~/Miniconda3-latest-Linux-x86_64.sh
 3. Add `conda` into `PATH`
 Nếu sau khi install mà vẫn không dùng `conda` được thì khả năng là chưa add `conda` vào `PATH`. Append vào `PATH` cũng dễ thôi mà mình làm biếng với lại cái lệnh dài vl khó nhớ, thôi thì cứ tìm `.../miniconda3/condabin/conda` rồi chạy `./conda init` là được (nhớ `source ~./bashrc` lại để kích hoạt cho shell hiện tại).
 
+==Important==: Thay vì gõ 'yes' thì hãy gõ 'Y'
+
 ```bash
 source ~/.bashrc
 ```
@@ -36,7 +38,7 @@ Nếu bạn gõ `nvidia-smi` mà báo lỗi thì là chưa có driver đó.
 1. Recommended drivers
 ```shell
 sudo apt-get update
-sudo apt-get upgrade
+# sudo apt-get upgrade shouldn't run, too long
 sudo apt install ubuntu-drivers-common
 sudo ubuntu-drivers devices
 ```
