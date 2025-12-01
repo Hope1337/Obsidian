@@ -26,3 +26,4 @@ Tiến hành điều khiển robot, sau khi hoàn thành, một tệp `.bag` s�
 ros2 bag play [record_file]
 ```
 
+Có thể sẽ cần thời gian để connections được thiết  lập nên lệnh đầu được phát sẽ không nhận, do vậy có thể thêm cờ `-d` và kèm theo số giây ros bag cần đợi trước khi phát lệnh trực tiếp.
